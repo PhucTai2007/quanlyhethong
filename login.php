@@ -6,9 +6,8 @@
 	$conn = mysqli_connect("localhost","root","","quanlyhethong");
 	if (isset($_POST['username'])) {
 		$username=$_POST['username'];
-		$password=($_POST['password']);
+		$password=md5($_POST['password']);
 		$sql= "SELECT username,password FROM user WHERE username='".$username."' AND password='".$password."'limit 1";
-		
         $result = $conn->query($sql);
 
 		if ($result->num_rows == 1) {
@@ -17,6 +16,7 @@
 			echo "Bạn chưa đăng nhập!";
 		}
 	}
+	$conn->close();
     // $conn = mysqli_connect("localhost", "root", "","quanlyhethong");
     // if(!$conn){
     //     die("khong thanh cong". mysqli_connect_error());
