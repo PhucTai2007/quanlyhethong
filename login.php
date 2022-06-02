@@ -6,7 +6,7 @@
 	$conn = mysqli_connect("localhost","root","","quanlyhethong");
 	if (isset($_POST['username'])) {
 		$username=$_POST['username'];
-		$password=md5($_POST['password']);
+		$password=MD5($_POST['password']);
 		$sql= "SELECT username,password FROM user WHERE username='".$username."' AND password='".$password."'limit 1";
         $result = $conn->query($sql);
 
