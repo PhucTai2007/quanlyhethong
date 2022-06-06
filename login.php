@@ -1,7 +1,5 @@
 <?php
-	//$value=$_POST["username"];
-	//setcookie("username", "$value");
-	session_start();
+session_start();
 	//Connect
 	$conn = new mysqli ("localhost","root","","quanlyhethong");
 
