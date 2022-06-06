@@ -3,5 +3,5 @@ session_start()
 ?>
 <?php
 	session_destroy();
-	header("location:index.html");
+	header("location:login.html");
 ?>
