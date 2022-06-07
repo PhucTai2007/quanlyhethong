@@ -37,8 +37,9 @@
 					$rs= mysqli_query($conn,$s);
 					$r=mysqli_fetch_assoc($rs);
 					    echo "Xin chào ".$r['HoTenKH'] ." | <a href='lichsudathang.php'>Lịch sử mua hàng</a><br>";
-					    echo "<a href='quanlytaikhoan.php'>Quản lý tài khoản</a> | <a href='giohang.php'>Giỏ hàng</a> | <a href='dangxuat.php'>Đăng xuất</a>";
+					        echo "<a href='quanlytaikhoan.php'>Quản lý tài khoản</a> | <a href='giohang.php'>Giỏ hàng</a> | <a href='dangxuat.php'>Đăng xuất</a>";
 				}else{
+                    echo"";
 				}
 			?>
         </div>
