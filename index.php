@@ -24,7 +24,8 @@ $conn = mysqli_connect ("localhost","root","","quanlyhethong");
 <body>
     <div id="header">
         <div id="header1">
-            <p><img src="img/logo.png">CHI CỤC TRỒNG TRỌT VÀ BẢO VỆ THỰC VẬT</p>
+            <img src="img/logo.png">
+            <p>CHI CỤC TRỒNG TRỌT VÀ<br>BẢO VỆ THỰC VẬT</p>
         </div>
         <div id="header2">
             <?php
