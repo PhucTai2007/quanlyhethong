@@ -6,7 +6,7 @@
        $Hoten = $_POST['hoten'];
        $Gioitinh = $_POST['gioitinh'];
        $Username = $_POST['username'];
-       $Password = $_POST['password'];
+       $Password = md5($_POST['password']);
        $Phone = $_POST['phone'];
        $mail = $_POST['mail'];
        $vaitro = $_POST['vaitro'];
