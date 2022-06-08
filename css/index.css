@@ -9,7 +9,7 @@ body{
 }
 
 #header #header1{
-    width: 30%;
+    width: 50%;
     float: left;
     height: 70px;
     text-indent: 30px;
@@ -17,7 +17,7 @@ body{
 
 #header #header1 p{
     margin: 0;
-    height: 70px;
+    height: 100px;
     line-height: 70px;
     font-size: 30px;
 }
@@ -26,4 +26,6 @@ body{
     width: 25%;
     float:right;
     height: 70px;
+    text-align: center;
+    padding: 25px;;
 }
