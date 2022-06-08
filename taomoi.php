@@ -51,7 +51,7 @@
                      <option value="1">User</option><br>
                     </select><br><br>
                     <input type="submit" name="themmoi" value="Thêm" style="margin-left: 150px;"/>
-                    <?php 
+                    <?php
                         require 'xuly.php';
                     ?>
 
