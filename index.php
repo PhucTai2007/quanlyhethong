@@ -1,16 +1,10 @@
 <?php
-// session_start();
-// $conn = mysqli_connect ("localhost","root","","quanlyhethong");
-//     $username=$_SESSION['username'];
-//     $sql= "SELECT * FROM user WHERE username='".$username."'";
+session_start();
+$conn = mysqli_connect ("localhost","root","","quanlyhethong");
+    $username=$_SESSION['username'];
+    $sql= "SELECT * FROM user WHERE username='".$username."'";
 
-//     $result = $conn->query($sql);
-// 	if($result->num_rows > 0){
-// 		while ($row = $result->fetch_array()) {
-//             echo"xin chao ". $username, "<br>";
-//             echo"<a href='logout.php'>dang xuat</a>";
-//         }
-//     }
+    $result = $conn->query($sql);
 ?>
 
 
@@ -30,15 +24,15 @@
         </div>
         <div id="header2">
             <?php
-				if(isset($_SESSION['taikhoan']) && isset($_SESSION['matkhau'])){
-					$taikhoan=$_SESSION['taikhoan'];
-					$matkhau=$_SESSION['matkhau'];
-					$s= "SELECT * from KhachHang WHERE MSKH='$taikhoan'";
+				if(isset($_SESSION['username']) && isset($_SESSION['password'])){
+					$username=$_SESSION['username'];
+					$password=$_SESSION['password'];
+					$s= "SELECT * from user WHERE username='$username'";
 					$rs= mysqli_query($conn,$s);
 					$r=mysqli_fetch_assoc($rs);
-					    echo "Xin chào ".$r['HoTenKH'] ." | <a href='lichsudathang.php'>Lịch sử mua hàng</a><br>";
-					    echo "<a href='quanlytaikhoan.php'>Quản lý tài khoản</a> | <a href='giohang.php'>Giỏ hàng</a> | <a href='dangxuat.php'>Đăng xuất</a>";
+					    echo "Xin chào ".$r['ten_user'] ." | <a href='logout.php'> Đăng xuất</a><br>";
 				}else{
+                    echo"0";
 				}
 			?>
         </div>

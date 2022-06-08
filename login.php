@@ -20,6 +20,8 @@ session_start();
 				}
 				if($user=="1"){
 					header("location:index.php");
+				}else{
+					echo"sai thông tin đăng nhập";
 				}
 			}
 		}
