@@ -34,7 +34,7 @@
         $sql = "SELECT * FROM user WHERE username = '$Username' OR mail_user = '$mail'";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0){
-            echo '<script language="javascript">alert("Bị trùng tên"); window.location="taomoi.php";</script>';
+            echo '<script language="javascript">alert("Bị trùng tên"); window.location="taomoiuser.php";</script>';
             die ();
         }
         else {
@@ -50,7 +50,7 @@
                 echo "Mã vai trò: ".$_POST['mavaitro']."<br/>";
             }
             else {
-                echo '<script language="javascript">alert("Lỗi"); window.location="taomoi.php";</script>';
+                echo '<script language="javascript">alert("Lỗi"); window.location="taomoiuser.php";</script>';
             }
         }
    }

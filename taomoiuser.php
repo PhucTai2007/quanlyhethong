@@ -7,7 +7,7 @@
     <body>
         <table border="1">
             <td>
-                <form method="post" action="taomoi.php" class="form">
+                <form method="post" action="taomoiuser.php" class="form">
                     <h2 style="text-align:center">Thêm USER mới</h2>
                     <!-- Họ tên: <input type="text" name="hoten" value="" required>
                     Giới tính: <input type="text" name="gioitinh" value="" required>
@@ -52,7 +52,7 @@
                     </select><br><br>
                     <input type="submit" name="themmoi" value="Thêm" style="margin-left: 150px;"/>
                     <?php 
-                        require 'xuly.php';
+                        require 'xulytaouser.php';
                     ?>
 
                 </form>

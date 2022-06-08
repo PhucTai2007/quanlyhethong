@@ -1,3 +1,4 @@
 <?php
-    echo"xin chao " , "admin";
+    echo"admin";
+    echo"<a href='taomoiuser.php'>Thêm user</a>";
 ?>
