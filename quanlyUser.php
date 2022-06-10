@@ -32,6 +32,6 @@
         ?>
         </table>
         <button onclick="document.location='admin.php'">Trở về</button>
-        <button onclick="document='taomoiuser.php'">Thêm User</button>
+        <button onclick="document.location='taomoiuser.php'">Thêm User</button>
     </body>
 </html>

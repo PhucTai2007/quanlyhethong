@@ -24,7 +24,7 @@
                 $s="SELECT * from user where username = '$username'";
                 $rs=mysqli_query($conn,$s);
                 $r=mysqli_fetch_assoc($rs);
-                echo "<a href='admin.php'>Về trang chủ</a>"
+                // echo "<a href='admin.php'>Về trang chủ</a>"
             ?>
         </div>
         
@@ -81,6 +81,7 @@
 			}
 	?>
 	<br>
+    <button onclick="document.location='admin.php'">Về trang chủ</button>
 	<hr>
     </body>
 </html>
