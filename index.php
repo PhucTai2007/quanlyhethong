@@ -25,13 +25,12 @@ $conn = mysqli_connect ("localhost","root","","quanlyhethong");
     <div id="header">
         <div id="header1">
             <img src="img/logo.png">
-            <p>CHI CỤC TRỒNG TRỌT VÀ<br>BẢO VỆ THỰC VẬT</p>
+            <p>CHI CỤC TRỒNG TRỌT VÀ BẢO VỆ THỰC VẬT</p>
         </div>
         <div id="header2">
             <?php
                 $username=$_SESSION['username'];
                 $sql= "SELECT * FROM user WHERE username='".$username."'";
-            
                 $result = $conn->query($sql);
                 if($result->num_rows > 0){
                     while ($row = $result->fetch_array()) {

@@ -8,7 +8,7 @@
             } else {
             echo "Error updating record: " . $conn->error;
             }
-        echo "<a href='Xoauser.php'>Trở về</a>";
+        echo "<a href='quanlyuser.php'>Trở về</a>";
         $conn->close();
     }
 ?>
