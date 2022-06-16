@@ -1,14 +1,14 @@
 <?php
     include_once('connect.php');
-    if(isset($_REQUEST['id_user']) and $_REQUEST['id_user']!=""){
-        $id_user=$_GET['id_user'];
-        $sql = "DELETE FROM user WHERE id_user='$id_user'";
+    if(isset($_REQUEST['id_loaihinh']) and $_REQUEST['id_loaihinh']!=""){
+        $id_loaihinh=$_GET['id_loaihinh'];
+        $sql = "DELETE FROM loaihinh WHERE id_loaihinh='$id_loaihinh'";
         if ($conn->query($sql) === TRUE) {
             echo "Xoá thành công!<br>";
             } else {
             echo "Error updating record: " . $conn->error;
             }
-        echo "<a href='quanlyUser.php'>Trở về</a>";
+        echo "<a href='QLLH.php'>Trở về</a>";
         $conn->close();
     }
 ?>

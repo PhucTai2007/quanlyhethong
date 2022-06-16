@@ -49,6 +49,9 @@
         <button onclick="document.location='suathongtinUser.php'">Sửa thông tin</button>
         <br>
         <br>
+        <button onclick="document.location='doimatkhau.php'">Đổi mật khẩu</button>
+        <br>
+        <br>
         <button onclick="document.location='index.php'">Về trang chủ</button>
     </body>
 </html>

@@ -37,7 +37,9 @@ $conn = mysqli_connect ("localhost","root","","quanlyhethong");
                     while ($row = $result->fetch_array()) {
                         echo"Xin chào: ". $row["ten_user"], "  |";
                         echo"<a href='logout.php'> Đăng Xuất</a>";
+                        // echo"<a href='doimatkhau.php'>Đổi mật khẩu</a>";
                         echo"<a href='thongtinUser.php'>Thông tin</a>";
+                        echo"<a href='QLCS.php'>Quản lý Cơ Sở</a>";
                     }
                 }
             ?>
