@@ -15,11 +15,12 @@
         <form id="form" class="form" action="login.php" method="POST" enctype="multipart/form-data">
             <div class="form-control">
                 <label for="username">Tài Khoản:</label>
-                <input type="text" id="username" name="username"/>
+					<input type="text" id="username" name="username" required/>
+
             </div>
             <div class="form-control">
                 <label for="password">Mật Khẩu:</label>
-                <input type="password" id="password" name="password"/>
+					<input type="password" id="password" name="password" required/>
             </div>
             <input type="submit" value="Đăng nhập" name="save">
         </form>

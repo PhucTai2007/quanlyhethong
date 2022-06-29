@@ -15,10 +15,10 @@
                 <label for="tenLH">Tên loại hình</label>
                 <input type="text" name="tenLH">
             </div>
-            <div class="form-control">
+            <!-- <div class="form-control">
                 <label for="idLH">ID loại hình</label>
                 <input type="text" name="idLH">
-            </div>
+            </div> -->
             <div class="form-control" >
                 <label for="trangthai">Trạng thái</label>
                 <select id="trangthai" name="trangthai" style="margin-left: 150px">
