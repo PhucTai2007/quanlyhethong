@@ -78,8 +78,11 @@
                                         <li><a class="hvr-sweep-to-bottom" href="QLCSUSER.php">Quản Lí Cơ Sở</a></li>
                                     </ul>
                                 </li>
+<<<<<<< HEAD
 
                                 
+=======
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                                 <li><a href="taikhoan.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài khoản<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a class="hvr-sweep-to-bottom" href="thongtinUser.php">Thông tin tài khoản</a></li>
@@ -100,6 +103,7 @@
                 <!-- div chức năng -->
             <div style="margin-left: 600px;">
             <div>
+<<<<<<< HEAD
             <?php 
                 $username=$_SESSION['username'];
                 $password=$_SESSION['password'];
@@ -116,10 +120,26 @@
             ?>
         </div>
         
+=======
+                <?php 
+                    $username=$_SESSION['username'];
+                    $password=$_SESSION['password'];
+                    $s3="SELECT * from user where username='$username'";
+                    $rs3=mysqli_query($conn,$s3);
+                    $r3=mysqli_fetch_assoc($rs3);
+                    $ten=$r3['ten_user'];
+                    $mail=$r3['mail_user'];
+                    $sdt=$r3['sdt_user'];
+                    $s="SELECT * from user where username = '$username'";
+                    $rs=mysqli_query($conn,$s);
+                    $r=mysqli_fetch_assoc($rs);
+                    // echo "<a href='index.php'>Về trang chủ</a>"
+                ?>
+            </div>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
        <form method="post">
            <?php 
                 echo "<h3>Sửa thông tin</h3><hr>";
-                // echo "Username". $username;
                 echo "<table id='tb'>
                     <tr>
                         <td>Username: <br><br></td>

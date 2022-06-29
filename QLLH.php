@@ -110,6 +110,7 @@
                     <tr>
                         <td>ID</td>
                         <td>Tên loại hình</td>
+<<<<<<< HEAD
                         <?php
                         require 'connect.php';
                         $query = mysqli_query($conn, "select * from `loaihinh`");
@@ -128,6 +129,37 @@
                 <br>
                 <p style="margin-left: 60px;"><button onclick="document.location='themLH.php'">Thêm</button></p>
                 <!-- <p style="margin-left: 60px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
+=======
+                        <td>Trạng thái</td>
+                        <?php
+                        require 'connect.php';
+                            $query = mysqli_query($conn, "select * from loaihinh WHERE trangthai_MD='0' ");
+                            while ($row = mysqli_fetch_array($query)) {
+                        ?>
+                    </tr>
+                    <tr></tr>
+                        <td><?php echo $row['id_loaihinh']; ?></td>
+                        <td><?php echo $row['ten_loaihinh']; ?></td>
+                        <td>
+                            <?php
+                                if($row['trangthai_MD'] == 0){
+                                    echo "Đang hoạt động";
+                                }else{
+                                    echo "Không hoạt động";
+                                }
+                            ?>
+                        </td>
+                        <td><a href="editLH.php?id_loaihinh=<?php echo $row['id_loaihinh']; ?>">Sửa</a></td>
+                        <td><a href="updatetrangthaiLH.php?id_loaihinh=<?php echo $row['id_loaihinh']; ?>">Cập nhật trạng thái</a></td>
+                    </tr>
+                <?php
+                    }
+                ?>
+                </table>
+                <br>
+                <button onclick="document.location='themLH.php'">Thêm</button>
+                <button onclick="document.location='loaihinhoff.php'">Loại hình không hoạt động</button>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                 
                 <br>
             </div>

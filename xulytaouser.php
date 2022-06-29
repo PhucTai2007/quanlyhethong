@@ -10,27 +10,27 @@
        $Phone = $_POST['phone'];
        $mail = $_POST['mail'];
        $vaitro = $_POST['vaitro'];
-       if (empty($Hoten)) {
-           array_push($errors, "Không được để trống!"); 
-        }
-        if (empty($Gioitinh)) {
-            array_push($errors, "Không được để trống!"); 
-        }
-        if (empty($Username)) {
-            array_push($errors, "Không được để trống!"); 
-        }
-        if (empty($Password)) {
-            array_push($errors, "Không được để trống!"); 
-        }
-        if (empty($Phone)) {
-            array_push($errors, "Không được để trống!"); 
-        }
-        if (empty($mail)) {
-            array_push($errors, "Không được để trống!"); 
-        }
-        if (empty($vaitro)) {
-            array_push($errors, "Không được để trống!"); 
-        }
+    //    if (empty($Hoten)) {
+    //        array_push($errors, "Không được để trống!"); 
+    //     }
+    //     if (empty($Gioitinh)) {
+    //         array_push($errors, "Không được để trống!"); 
+    //     }
+    //     if (empty($Username)) {
+    //         array_push($errors, "Không được để trống!"); 
+    //     }
+    //     if (empty($Password)) {
+    //         array_push($errors, "Không được để trống!"); 
+    //     }
+    //     if (empty($Phone)) {
+    //         array_push($errors, "Không được để trống!"); 
+    //     }
+    //     if (empty($mail)) {
+    //         array_push($errors, "Không được để trống!"); 
+    //     }
+    //     if (empty($vaitro)) {
+    //         array_push($errors, "Không được để trống!"); 
+    //     }
         $sql = "SELECT * FROM user WHERE username = '$Username' OR mail_user = '$mail'";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0){
@@ -54,5 +54,4 @@
             }
         }
    }
-   
 ?>

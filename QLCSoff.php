@@ -64,21 +64,34 @@
                     <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
                         <nav>
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="index.php">Trang Chủ</a></li>
+                                <li class="active"><a href="admin.php">Trang Chủ</a></li>
                                 <!-- <li><a href="about.html" class="hvr-sweep-to-bottom">About</a></li>
                                         <li><a href="plans.html" class="hvr-sweep-to-bottom">Plans</a></li> -->
                                 <li><a href="#" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quản Lí<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="QLCSUSER.php">Quản Lí Cơ Sở</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="QLLH.php">Quản Lí Loại Hình</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="QLLV.php">Quản Lí Lĩnh Vực</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="QLCS.php">Quản Lí Cơ Sở</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="quanlyUser.php">Quản Lí Người Dùng</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="icons.html">Icons</a></li>
+                                                <li><a class="hvr-sweep-to-bottom" href="typography.html">Typography</a></li>     -->
                                     </ul>
                                 </li>
 
-                               
+                                <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li><a href="taikhoan.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài khoản<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="thongtinUser.php">Thông tin tài khoản</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="thongtinadmin.php">Thông tin tài khoản</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="doimatkhau.php">Đổi Mật Khẩu</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="suathongtinUser.php">Sửa Tài Khoản</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="suathongtinadmin.php">Sửa Tài Khoản</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="logout.php">Đăng Xuất</a></li>
                                     </ul>
                                 </li>
@@ -91,7 +104,7 @@
             </div>
 
 
-                <h1 style="text-align: center;"><b>Quản lí cơ sở</b></h1>
+                <h1 style="text-align: center;"><b>Quản lí cơ sở ngưng hoạt động</b></h1>
             <div style="margin-left: 600px;">
                <table border="1">
                     <tr>
@@ -104,7 +117,7 @@
                     </tr>
                     <?php 
                         require 'connect.php';
-                        $query=mysqli_query($conn,"select * from `coso`");
+                        $query=mysqli_query($conn,"select * from `coso` WHERE trangthai='0' ");
                         while($row=mysqli_fetch_array($query)){
                     ?>
                     <tr>
@@ -114,13 +127,8 @@
                         <td><?php echo $row['dia_chi']; ?></td>
                         <td><?php echo $row['sdt']; ?></td>
                         <td><?php echo $row['trinhdo_bangcap']; ?></td>
-<<<<<<< HEAD
-                        <td><a href="editCS.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</td>
+                        <td><a href="RupdatetrangthaiCS.php?id_coso=<?php echo $row['id_coso']; ?>">Cập nhật</td>
                         <td><a href="deleteCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</td>
-=======
-                        <td><a href="editCS.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</a></td>
-                        <td><a href="deleteCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</a></td>
->>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                     </tr>
                     <?php
                     }
@@ -129,6 +137,7 @@
                 <br>
                 <!-- <br> -->
                 <p style="margin-left: 300px;"><button onclick="document.location='themCS.php'">Thêm</button></p>
+                <button onclick="document.location='QLCS.php'">Cơ sỡ hoạt động</button>
                 <!-- <p style="margin-left: 300px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
                 
             </div>

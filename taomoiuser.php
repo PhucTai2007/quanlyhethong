@@ -42,17 +42,29 @@
             </div>
             <div class="form-control">
                 <label for="password">Mật khẩu:</label>
+<<<<<<< HEAD
                 <input type="password" id="password" name="password" required/>
+=======
+                <input type="password" id="password" name="password" required pattern=".{8,}" title="Mật khẩu phải có ít nhất 8 kí tự"/>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                 <small id="error3">trong pass</small>
             </div>
             <div class="form-control">
                 <label for="phone">Số ĐT</label>
+<<<<<<< HEAD
                 <input type="text" id="phone" name="phone" required/>
+=======
+                <input type="text" id="phone" name="phone" required pattern=".{10}" title="Vui lòng nhập lại số ĐT"/>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                 <small id="error4">trong phone</small>
             </div>
             <div class="form-control">
                 <label for="mail">Email</label>
+<<<<<<< HEAD
                 <input type="mail" id="mail" name="mail" required/>
+=======
+                <input type="mail" id="mail" name="mail" required pattern="[a-z0-9._%+-]+@gmail.com" title="Sai định dạng Gmail"/>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                 <small id="error5">trong mail</small>
             </div>
             <div class="form-control" >

@@ -117,7 +117,11 @@
                     </tr>
                     <?php 
                         require 'connect.php';
+<<<<<<< HEAD
                         $query=mysqli_query($conn,"select * from `coso`");
+=======
+                        $query=mysqli_query($conn,"select * from `coso` WHERE trangthai='1' ");
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                         while($row=mysqli_fetch_array($query)){
                     ?>
                     <tr>
@@ -128,7 +132,11 @@
                         <td><?php echo $row['sdt']; ?></td>
                         <td><?php echo $row['trinhdo_bangcap']; ?></td>
                         <td><a href="editCS.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</td>
+<<<<<<< HEAD
                         <td><a href="deleteCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</td>
+=======
+                        <td><a href="updatetrangthaiCS.php?id_coso=<?php echo $row['id_coso']; ?>">Cập nhật</td>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                     </tr>
                     <?php
                     }
@@ -136,7 +144,12 @@
                 </table>
                 <br>
                 <!-- <br> -->
+<<<<<<< HEAD
                 <p style="margin-left: 300px;"><button onclick="document.location='themCS.php'">Thêm</button></p>
+=======
+                <button onclick="document.location='themCS.php'">Thêm</button>
+                <button onclick="document.location='QLCSoff.php'">Cơ sỡ chưa hoạt động</button>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                 <!-- <p style="margin-left: 300px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
                 
             </div>
