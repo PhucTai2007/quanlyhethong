@@ -13,21 +13,17 @@
         <form id="form" class="form" method="post" action="themLH.php" enctype="multipart/form-data">
             <div class="form-control">
                 <label for="tenLH">Tên loại hình</label>
-                <input type="text" name="tenLH">
+                <input type="text" name="tenLH" required>
             </div>
-            <div class="form-control">
-                <label for="idLH">ID loại hình</label>
-                <input type="text" name="idLH">
-            </div>
-            <div class="form-control" >
+            <!-- <div class="form-control" >
                 <label for="trangthai">Trạng thái</label>
                 <select id="trangthai" name="trangthai" style="margin-left: 150px">
                     <option value="0">Hoạt động</option>
-                    <option value="1">Đã xóa</option>
+                    <option value="1">Không hoạt động</option>
                 </select><br>
-            </div>
+            </div> -->
             <input id="themmoi" name="themmoi" type="submit" value="Thêm">
-            <?php 
+            <?php
                 require 'xulythemLH.php';
             ?>
         </form>
