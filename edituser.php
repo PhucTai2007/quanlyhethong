@@ -1,28 +1,16 @@
 <?php
 include_once("connect.php");
-if(isset($_GET['id_loaihinh'])){
-    $sql = "SELECT * FROM loaihinh where id_loaihinh = " .$_GET['id_loaihinh'];
+if(isset($_GET['id_user'])){
+    $sql = "SELECT * FROM user where id_user = " .$_GET['id_user'];
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
-}
-
-if(isset($_POST['update'])){
-    $ten = $_POST['ten_loaihinh'];
-    $update = "UPDATE loaihinh SET ten_loaihinh='$ten' where id_loaihinh= ". $_GET['id_loaihinh'];
-    $up = mysqli_query($conn, $update);
-    if(!isset($sql)){
-        die("Error $sql" .mysqli_connect_error());
-    }else{
-        echo '<script language="javascript">alert("Cập nhật loại hình thành công!"); window.location="QLLH.php";</script>';
-        // header("location:QLLH.php");
-    }
 }
 ?>
 <!DOCTYPE html>
     <html lang="en">
 
         <head>
-            <title>CẬP NHẬT LOẠI HÌNH</title>
+            <title>CẬP NHẬT User </title>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,14 +114,32 @@ if(isset($_POST['update'])){
             </div>
             <!-- CODE -->
             <div style="margin-left: 350px;">
-                <form method="post">
-                    <h1 style="margin-left: 420px;">Edit </h1>
-                    <label style="margin-left: 400px;">Tên loại hình:</label>
-                    <input style="margin-right: 390px;" type="text" name="ten_loaihinh" value="<?php echo $row['ten_loaihinh']; ?>" required><br/><br/>
-                    <button style="margin-left: 400px;" type="submit" name="update" id="update" ><strong>Update</strong></button>
-                    <a href="QLLH.php"><button style="margin-right:350px ;" type="button" value="button">Cancel</button></a>
-                </form>
-            
+            <form style="margin-left: 400px;" method="post">
+                <h1>Edit </h1>
+                <label>Tên người dùng </label>
+                <input type="text" name="ten_user" value="<?php echo $row['ten_user']; ?>" required><br/><br/>
+                <label>SDT</label>
+                <input type="text" name="sdt_user" value="<?php echo $row['sdt_user']; ?>" required pattern=".{10}" title="Vui lòng nhập lại số ĐT"/><br><br>
+                <label>Mail</label>
+                <input type="email" name="mail_user" value="<?php echo $row['mail_user']; ?>"  pattern="[a-z0-9._%+-]+@gmail.com"/><br><br>
+                <button type="submit" name="update" id="update" ><strong>Update</strong></button>
+                <a href="QuanlyUser.php"><button type="button" value="button">Cancel</button></a>
+            </form>
+            <?php
+            if(isset($_POST['update'])){
+                $ten_user = $_POST['ten_user'];
+                $sdt_user = $_POST['sdt_user'];
+                $mail_user = $_POST['mail_user'];
+                $update = "UPDATE user SET ten_user='$ten_user' , sdt_user ='$sdt_user' , mail_user='$mail_user' where id_user= ". $_GET['id_user'];
+                $up = mysqli_query($conn, $update);
+                if(!isset($sql)){
+                    die("Error $sql" .mysqli_connect_error());
+                }else{
+                    echo '<script language="javascript">alert("Cập nhật người dùng thành công!"); window.location="QuanlyUser.php";</script>';
+                    // header("location:QuanlyUser.php");
+                }
+            }
+            ?>
             </div>
         <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >

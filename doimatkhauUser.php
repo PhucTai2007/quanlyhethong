@@ -102,6 +102,7 @@
             <div style="margin-left: 600px;">
             <div>
         <?php
+        if(isset($_SESSION['username']) && isset($_SESSION['password'])){
             $username=$_SESSION['username'];
             $password=$_SESSION['password'];
             $s= "SELECT * from user WHERE username='$username'";
@@ -131,6 +132,9 @@
 				</tr>
 			</table>";
     ?>
+    <?php
+        }
+    ?>
     <input type="submit" name="ud" value="Đổi Mật Khẩu" id="tee">
     </form>
     <?php
@@ -143,12 +147,16 @@
 		$temp3=strlen($nlmkmoi);
         if($mkmoi != $nlmkmoi) {
             echo "<script type='text/javascript'>alert('nhập lại mật khẩu sai');</script>";
-        }else{
+        }
+        elseif($mkcu != md5($_SESSION['password'])){
+            echo "<script type='text/javascript'>alert('sai mật khẩu cu');</script>";
+        }
+        else{
             $sql = "UPDATE user set password='$mkmoi' where username='$username'";
             if(mysqli_query($conn,$sql)){
                 $_SESSION=$mkmoi;
                 echo "<script type='text/javascript'>alert('Cập nhật thông tin thành công');</script>";
-                echo "<script type='text/javascript'>window.location='thongtinUser.php';</script>";
+                echo "<script type='text/javascript'>window.location='thongtinuser.php';</script>";
             }else{
             echo"that bai";
             }

@@ -86,8 +86,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -114,6 +114,7 @@
             <div style="margin-left: 600px;">
             <div>
         <?php
+        if(isset($_SESSION['username']) && isset($_SESSION['password'])){
             $username=$_SESSION['username'];
             $password=$_SESSION['password'];
             $s= "SELECT * from user WHERE username='$username'";
@@ -143,6 +144,9 @@
 				</tr>
 			</table>";
     ?>
+    <?php
+        }
+    ?>
     <input type="submit" name="ud" value="Đổi Mật Khẩu" id="tee">
     </form>
     <?php
@@ -155,7 +159,11 @@
 		$temp3=strlen($nlmkmoi);
         if($mkmoi != $nlmkmoi) {
             echo "<script type='text/javascript'>alert('nhập lại mật khẩu sai');</script>";
-        }else{
+        }
+        elseif($mkcu != md5($_SESSION['password'])){
+            echo "<script type='text/javascript'>alert('sai mật khẩu cu');</script>";
+        }
+        else{
             $sql = "UPDATE user set password='$mkmoi' where username='$username'";
             if(mysqli_query($conn,$sql)){
                 $_SESSION=$mkmoi;

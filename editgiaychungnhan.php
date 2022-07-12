@@ -1,8 +1,33 @@
+<?php
+include_once("connect.php");
+if(isset($_GET['id_cosolinhvuc'])){
+    $sql = "SELECT * FROM coso_linhvuc where id_cosolinhvuc = " .$_GET['id_cosolinhvuc'];
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result);
+}
+if(isset($_POST['update'])){
+    $soGCN = $_POST['soGCN'];
+    $ngaycap = $_POST['ngaycap'];
+    $ngayhethan = $_POST['ngayhethan'];
+
+    $update = "UPDATE coso_linhvuc SET  soGCN = '".$_POST['soGCN']."' , ngay_cap = '$ngaycap' , ngay_hethan = '$ngayhethan'  where id_cosolinhvuc= ". $_GET['id_cosolinhvuc'];
+    $up = mysqli_query($conn, $update);
+    if(!isset($up)){
+        die("Error $up" .mysqli_connect_error());
+    }else{
+        echo '<script language="javascript">alert("Cấp mới Giấy chứng nhân thành công!"); window.location="giaychungnhan.php";</script>';
+    }
+}
+?>
+
 <!DOCTYPE html>
     <html>
 
         <head>
-            <title>Thống kê</title>
+            <title>EDIT GCN</title>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="keywords" content="CHI CỤC TRỒNG TRỌT VÀ BẢO VỆ THỰC VẬT TỈNH TIỀN GIANG" />
@@ -80,8 +105,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -102,11 +127,39 @@
                 </nav>
             </div>
             </div>
-            <!-- DIV CHỨC NĂNG -->
 
-                <h2 style="text-align: center;"><b>THỐNG KÊ THEO KHU VỰC</b></h2>
-            <div style="margin-left: 600px;">
-               <!-- CODE TRONG ĐÂY -->
+        <!-- CODE   -->
+                <h1 style="text-align: center;"><b>EDIT</b></h1>
+            <div style="margin-left: 750px;">
+            <form method="post">
+            <div>
+                <?php
+                require 'connect.php';
+                $query=mysqli_query($conn,"SELECT coso.ten_coso,linhvuc.ten_linhvuc, coso_linhvuc.soGCN, coso_linhvuc.ngay_hethan,coso_linhvuc.ngay_cap, coso_linhvuc.id_cosolinhvuc from coso_linhvuc
+                    INNER JOIN coso ON coso.id_coso=coso_linhvuc.id_coso
+                    INNER JOIN linhvuc on linhvuc.id_linhvuc = coso_linhvuc.id_linhvuc where id_cosolinhvuc = '".$_GET['id_cosolinhvuc']."' ");
+                    while($row=mysqli_fetch_assoc($query)){
+                ?>
+                <label>Tên Cơ Sở: <?php echo $row['ten_coso'] ?></label><br>
+                <label>Lĩnh vực: <?php echo $row['ten_linhvuc'] ?></label>
+                </div>
+                    <div>
+                        <label>Số GCN:
+                            <input type="text" name="soGCN" value="<?php echo $row['soGCN'] ?>" required/>
+                        </label><br/><br/>
+                        <label>Ngày Cấp:
+                            <input type="date" name="ngaycap"  value="<?php echo $row['ngay_cap'] ?>" required/>
+                        </label><br/><br/>
+                        <label>Ngày hết hạn:
+                            <input type="date" name="ngayhethan" value="<?php echo $row['ngay_hethan'] ?>" required/>
+                        </label><br/><br/>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                    <button type="submit" name="update" id="update">Update</button>
+                    <a href="giaychungnhan.php"><button type="button" value="button">Cancel</button></a>
+            </form>
             </div>
             <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >

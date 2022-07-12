@@ -1,7 +1,7 @@
 <?php
 session_start();
 	//Connect
-	$conn = new mysqli ("localhost","root","","quanlyhethong");
+	$conn = new mysqli ("localhost","root","","quanlyhethong") or die("Thất bại");
 
 	if (isset($_POST['username'])) {
 		$username=$_POST['username'];
@@ -10,7 +10,7 @@ session_start();
 		$sql= "SELECT * FROM user WHERE username='".$username."' AND password='".$password."'";
         $result = $conn->query($sql);
 
-		if ($result->num_rows == 1 ) {
+		if ($result->num_rows > 0 ) {
 			while($row=mysqli_fetch_assoc($result)){
 				$user=$row['mavaitro'];
 				$_SESSION['username']=$_POST['username'];
@@ -20,10 +20,11 @@ session_start();
 				}
 				if($user=="1"){
 					header("location:index.php");
-				}else{
-					echo"sai thông tin đăng nhập";
 				}
 			}
+		}
+		else{
+			echo '<script language="javascript">alert("Sai thông tin đăng nhập"); window.location="login.html";</script>';;
 		}
 		$conn ->close();
 	}

@@ -38,7 +38,7 @@
             die ();
         }
         else {
-            $sql = "INSERT INTO user (username , password , ten_user , gioi_tinh , sdt_user , mail_user , mavaitro) VALUES ('$Username' , '$Password' , '$Hoten' , '$Gioitinh' , '$Phone' , '$mail' , '$vaitro')";
+            $sql = "INSERT INTO user (username , password , ten_user , gioi_tinh , sdt_user , mail_user , mavaitro, trangthai) VALUES ('$Username' , '$Password' , '$Hoten' , '$Gioitinh' , '$Phone' , '$mail' , '$vaitro',0)";
             echo '<script language="javascript">alert("Thêm User thành công!"); window.location="quanlyUser.php";</script>';
             if (mysqli_query($conn, $sql)){
                 echo "Họ tên: ".$_POST['ten_user']."<br/>";

@@ -1,3 +1,21 @@
+<?php
+$s ='';
+if(isset($_POST['huyen'])){
+      $s=$_POST['huyen'];
+}
+$ss = '';
+if(isset($_POST['xa'])){
+    $ss=$_POST['xa'];
+    }
+
+$trang ='';
+if(isset($_GET['trang'])){
+    $trang = $_GET['trang'];
+    settype($trang,"int");
+}else{
+    $trang =1;
+}
+?>
 <!DOCTYPE html>
     <html>
 
@@ -80,8 +98,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -102,44 +120,107 @@
                 </nav>
             </div>
             </div>
-
-
-                <h1 style="text-align: center;"><b>Quản lí cơ sở</b></h1>
-            <div style="margin-left: 600px;">
-               <table border="1">
+                <h1 style="text-align: center;"><b>Quản lí cơ sở hoạt động</b></h1>
+            <div>
+            <div>
+               <table border="1" style="margin:0 auto;">
                     <tr>
-                    <td>ID</td>
-                    <td>Tên Cơ Sở</td>
-                    <td>Tên chủ cơ sở</td>
-                    <td>Địa chỉ</td>
-                    <td>Phone</td>
-                    <td>Trình độ</td>
+                        <th rowspan="2">ID</th>
+                        <th rowspan="2">Tên Cơ Sở</th>
+                        <th rowspan="2">Tên chủ cơ sở</th>
+                        <th colspan="2">Trình độ nhân lực</th>
+                        <th colspan="3" style="text-align: center;">Địa chỉ</th>
+                        <th rowspan="2">Loại hình</th>
+                        <th rowspan="2">Lĩnh vực</th>
+                        <th rowspan="2">Số GCN</th>
+                        <th colspan="2">Thời hạn</th>
+                        <th rowspan="2">tình trạng</th>
+                        <th rowspan="2">Phone</th>
+                        <th rowspan="2">Ghi chú</th>
                     </tr>
-                    <?php 
+                    <tr>
+                        <th>Bằng Cấp</th>
+                        <th>GIấy chứng nhận</th>
+                        <th>Ấp</th>
+                        <th>Xã</th>
+                        <th>Huyện</th>
+                        <th>Từ ngày</th>
+                        <th>Đến ngày</th>
+                    </tr>
+                    <?php
                         require 'connect.php';
-                        $query=mysqli_query($conn,"select * from `coso` WHERE trangthai='1' ");
-                        while($row=mysqli_fetch_array($query)){
+                        $sotin1trang = 10;
+                        $from = ($trang - 1) * 10;
+                        $query=mysqli_query($conn,"SELECT coso.id_coso , coso.id_loaihinh , coso.id_tthd , huyen.id_huyen , xa.id_xa , coso.dia_chi , coso.ten_coso , coso.ten_chucoso , coso.sdt , coso.trinhdo_bangcap , coso.ghi_chu , loaihinh.ten_loaihinh , tinhtranghoatdong.ten_tthd , huyen.ten_huyen , xa.ten_xa , coso.trangthai , linhvuc.ten_linhvuc , coso_linhvuc.soGCN , coso_linhvuc.ngay_cap , coso_linhvuc.ngay_hethan   from coso
+                        INNER JOIN huyen on coso.id_huyen = huyen.id_huyen
+                        INNER JOIN xa on coso.id_xa = xa.id_xa
+                        INNER JOIN tinhtranghoatdong on coso.id_tthd = tinhtranghoatdong.id_tthd
+                        INNER JOIN loaihinh on coso.id_loaihinh= loaihinh.id_loaihinh
+                        INNER JOIN coso_linhvuc on coso.id_coso = coso_linhvuc.id_coso
+                        INNER JOIN linhvuc on linhvuc.id_linhvuc = coso_linhvuc.id_linhvuc
+                        WHERE trangthai='1' and (huyen.ten_huyen LIKE '%$s%') and (xa.ten_xa LIKE '%$ss%') LIMIT $from , $sotin1trang ");
+                        $i = 0;
+                        while($row=mysqli_fetch_assoc($query)){
+                            $i++;
                     ?>
                     <tr>
-                        <td><?php echo $row['id_coso']; ?></td>
+                        <td><?php echo  $i; ?></td>
                         <td><?php echo $row['ten_coso']; ?></td>
                         <td><?php echo $row['ten_chucoso']; ?></td>
+                        <td><?php
+                                // echo $row['trinhdo_bangcap'];
+                                if($row['trinhdo_bangcap'] == 1){
+                                    echo "X";
+                                }else{
+                                    echo "";
+                                }
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                                if($row['trinhdo_bangcap'] == 2){
+                                    echo "X";
+                                }else{
+                                    echo "";
+                                }
+                            ?>
+                        </td>
                         <td><?php echo $row['dia_chi']; ?></td>
+                        <td><?php echo $row['ten_xa']; ?></td>
+                        <td><?php echo $row['ten_huyen']; ?></td>
+                        <td><?php echo $row['ten_loaihinh'];?></td>
+                        <td><?php echo $row['ten_linhvuc'];?></td>
+                        <td><?php echo $row['soGCN'];?></td>
+                        <td><?php echo $row['ngay_cap'];?></td>
+                        <td><?php echo $row['ngay_hethan'];?></td>
+                        <td><?php echo $row['ten_tthd'];?></td>
                         <td><?php echo $row['sdt']; ?></td>
-                        <td><?php echo $row['trinhdo_bangcap']; ?></td>
-                        <td><a href="editCS.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</td>
-                        <td><a href="updatetrangthaiCS.php?id_coso=<?php echo $row['id_coso']; ?>">Cập nhật</td>
+                        <td><?php echo $row['ghi_chu']; ?></td>
+                        <td><a href="editCS.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</a></td>
+                        <td><a href="updatetrangthaiCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</a></td>
                     </tr>
                     <?php
                     }
                     ?>
                 </table>
                 <br>
+                <div style="text-align: center;">
+                <?php
+                    require 'connect.php';
+                    $x = mysqli_query($conn,"SELECT id_coso from coso WHERE trangthai='1'");
+                    $tongsotin = mysqli_num_rows($x);
+                    $sotrang = ceil( $tongsotin / $sotin1trang);
+                    for($t=1 ; $t <= $sotrang   ; $t++){
+                            echo "<a href='QLCS.php?trang=$t'> trang $t --</a> ";
+                    }
+                ?>
+                </div><br>
                 <!-- <br> -->
-                <button onclick="document.location='themCS.php'">Thêm</button>
-                <button onclick="document.location='QLCSoff.php'">Cơ sỡ chưa hoạt động</button>
+                <div style="text-align: center;">
+                    <button onclick="document.location='themCS.php'">Thêm</button>
+                    <!-- <button onclick="document.location='QLCSoff.php'">Cơ sở ngưng hoạt động</button> -->
+                </div>
                 <!-- <p style="margin-left: 300px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
-                
             </div>
             <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >
@@ -213,3 +294,5 @@
     </body>
 
     </html>
+
+

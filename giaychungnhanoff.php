@@ -1,31 +1,23 @@
 <?php
-include_once("connect.php");
-if(isset($_GET['id_loaihinh'])){
-    $sql = "SELECT * FROM loaihinh where id_loaihinh = " .$_GET['id_loaihinh'];
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($result);
+$ten_coso = '';
+if(isset($_POST['giaychungnhan'])){
+    $s=$_POST['giaychungnhan'];
 }
 
-if(isset($_POST['update'])){
-    $ten = $_POST['ten_loaihinh'];
-    $update = "UPDATE loaihinh SET ten_loaihinh='$ten' where id_loaihinh= ". $_GET['id_loaihinh'];
-    $up = mysqli_query($conn, $update);
-    if(!isset($sql)){
-        die("Error $sql" .mysqli_connect_error());
-    }else{
-        echo '<script language="javascript">alert("Cập nhật loại hình thành công!"); window.location="QLLH.php";</script>';
-        // header("location:QLLH.php");
-    }
+$trang ='';
+if(isset($_GET['trang'])){
+    $trang = $_GET['trang'];
+    settype($trang,"int");
+}else{
+    $trang =1;
 }
 ?>
+
 <!DOCTYPE html>
-    <html lang="en">
+    <html>
 
         <head>
-            <title>CẬP NHẬT LOẠI HÌNH</title>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Thống kê</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="keywords" content="CHI CỤC TRỒNG TRỌT VÀ BẢO VỆ THỰC VẬT TỈNH TIỀN GIANG" />
@@ -121,21 +113,72 @@ if(isset($_POST['update'])){
                             </ul>
                         </nav>
                     </div>
+
                 </nav>
             </div>
             </div>
-            <!-- CODE -->
+            <!-- DIV CHỨC NĂNG -->
+
+                <h2 style="text-align: center;"><b>THỐNG KÊ GCN</b></h2>
             <div style="margin-left: 350px;">
-                <form method="post">
-                    <h1 style="margin-left: 420px;">Edit </h1>
-                    <label style="margin-left: 400px;">Tên loại hình:</label>
-                    <input style="margin-right: 390px;" type="text" name="ten_loaihinh" value="<?php echo $row['ten_loaihinh']; ?>" required><br/><br/>
-                    <button style="margin-left: 400px;" type="submit" name="update" id="update" ><strong>Update</strong></button>
-                    <a href="QLLH.php"><button style="margin-right:350px ;" type="button" value="button">Cancel</button></a>
-                </form>
-            
+               <!-- CODE TRONG ĐÂY -->
+               <form action="" method="POST">
+                    <label for="">Cơ sở được cấp GCN </label>
+                    <input type="submit" name="thongke" value="Thống Kê">
+               </form><br>
+               <table border="1">
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên cơ sở</th>
+                    </tr>
+                    <?php
+                    require 'connect.php';
+                    $sotin1trang = 10;
+                    $from = ($trang - 1) * 10;
+                    $sql="SELECT id_coso FROM coso EXCEPT SELECT id_coso FROM coso_linhvuc";
+                    $result = $conn->query($sql);
+                    $tong=mysqli_query($conn,$sql);
+                    $i = 0;
+                    while($row = $result->fetch_assoc()) {
+                        $i++;
+                    ?>
+                        <tr>
+                            <td><?php echo $i; ?></td>
+                            <td>
+                                <?php
+                                include_once("connect.php");
+                                $sql ="SELECT * FROM coso where id_coso ='".$row['id_coso']."' ";
+                                $query =  mysqli_query($conn, $sql);
+                                $num = mysqli_num_rows($query);
+                                if($num>0){
+                                    while($row = mysqli_fetch_array($query)){
+                            ?>
+                            <?php echo $row['ten_coso'] ?>
+                            <td><a href="themCSLV.php?id_coso=<?php echo $row['id_coso']; ?>">Thêm lĩnh vực</a></td>
+                            <?php
+                                }
+                            }
+                        }
+                        ?>
+                            </td>
+                        </tr>
+                        
+                        <h3>Tổng số cơ sở thống kê là: <?php echo mysqli_num_rows($tong); ?></h3>
+               </table><br>
+               <div style="text-align: center;">
+                <?php
+                    require 'connect.php';
+                    $x = mysqli_query($conn,"SELECT id_coso FROM coso EXCEPT SELECT id_coso FROM coso_linhvuc");
+                    $tongsotin = mysqli_num_rows($x);
+                    $sotrang = ceil( $tongsotin / $sotin1trang);
+                    for($t=1 ; $t <= $sotrang   ; $t++){
+                            echo "<a href='giaychungnhanoff.php?trang=$t'> trang $t --</a> ";
+                    }
+                ?>
+                </div><br>
+               <button onclick="document.location='giaychungnhan.php'">THỐNG KÊ GCN</button>
             </div>
-        <div class="banner-bottom">
+            <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >
             <div class="w3-banner-bottom-heading">
                 <h3> <span></span></h3>

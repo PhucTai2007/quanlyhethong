@@ -1,3 +1,17 @@
+<?php
+if(isset($_POST['giaychungnhan'])){
+    $s=$_POST['giaychungnhan'];
+}
+
+$trang ='';
+if(isset($_GET['trang'])){
+    $trang = $_GET['trang'];
+    settype($trang,"int");
+}else{
+    $trang =1;
+}
+?>
+
 <!DOCTYPE html>
     <html>
 
@@ -80,8 +94,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -105,8 +119,60 @@
             <!-- DIV CHỨC NĂNG -->
 
                 <h2 style="text-align: center;"><b>THỐNG KÊ GCN</b></h2>
-            <div style="margin-left: 600px;">
+            <div style="margin-left: 350px;">
                <!-- CODE TRONG ĐÂY -->
+               <form action="" method="POST">
+                    <label for="">Cơ sở được cấp GCN </label>
+                    <input type="submit" name="thongke" value="Thống Kê">
+               </form><br>
+               <table border="1">
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên cơ sở</th>
+                        <th>Tên Lĩnh vực</th>
+                        <th>Số GCN</th>
+                        <th>Ngày Cấp</th>
+                        <th>Ngày Hết hạn</th>
+                    </tr>
+                    <?php
+                    require 'connect.php';
+                    $sotin1trang = 10;
+                    $from = ($trang - 1) * 10;
+                    $sql="SELECT coso.id_coso,coso.ten_coso,coso_linhvuc.id_cosolinhvuc,linhvuc.id_linhvuc, coso_linhvuc.soGCN,coso_linhvuc.ngay_cap,coso_linhvuc.ngay_hethan,linhvuc.ten_linhvuc from coso
+                        INNER JOIN coso_linhvuc ON coso.id_coso=coso_linhvuc.id_coso INNER JOIN linhvuc ON coso_linhvuc.id_linhvuc=linhvuc.id_linhvuc
+                        WHERE coso_linhvuc.id_linhvuc !='1' LIMIT $from , $sotin1trang ";
+                    $result = $conn->query($sql);
+                    $tong=mysqli_query($conn,$sql);
+                    $i = 0;
+                    while($row = $result->fetch_assoc()) {
+                        $i++;
+                    ?>
+                        <tr>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo $row['ten_coso']; ?></td>
+                            <td><?php echo $row['ten_linhvuc']; ?></td>
+                            <td><?php echo $row['soGCN']; ?></td>
+                            <td><?php echo $row['ngay_cap']; ?></td>
+                            <td><?php echo $row['ngay_hethan']; ?></td>
+                            <td><a href="editcosolinhvuc.php?id_cosolinhvuc=<?php echo $row['id_cosolinhvuc']; ?>">Sửa</a></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+               </table><br>
+               <div style="text-align: center;">
+                <?php
+                    require 'connect.php';
+                    $x = mysqli_query($conn,"SELECT id_cosolinhvuc from coso_linhvuc WHERE coso_linhvuc.id_linhvuc !='1' ");
+                    $tongsotin = mysqli_num_rows($x);
+                    $sotrang = ceil( $tongsotin / $sotin1trang);
+                    for($t=1 ; $t <= $sotrang   ; $t++){
+                            echo "<a href='giaychungnhan.php?trang=$t'> trang $t --</a> ";
+                    }
+                ?>
+                </div><br>
+               <button onclick="document.location='giaychungnhanoff.php'">Cơ sở chưa cấp linh vực</button>
+                <h3>Tổng số cơ sở thống kê là: <?php echo $tongsotin ?></h3>
             </div>
             <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >

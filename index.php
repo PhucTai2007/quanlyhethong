@@ -98,7 +98,7 @@ $conn = mysqli_connect("localhost", "root", "", "quanlyhethong");
             <div id="immersive_slider">
                 <div class="slide" data-blurred="">
                     <div class="col-md-6 image">
-                        <img src="images/1a.jpg" alt="Slider 1" />
+                        <img src="images/1a.jpg" alt="" />
                     </div>
                     <div class="col-md-6 content">
                         <h3>Chào mừng bạn đến với website <span>Chi cục trồng trọt và bảo vệ thực vật </span></h3>
@@ -108,7 +108,7 @@ $conn = mysqli_connect("localhost", "root", "", "quanlyhethong");
                 </div>
                 <div class="slide" data-blurred="">
                     <div class="col-md-6 image">
-                        <img src="images/ok.jpg" alt="Slider 1" />
+                        <img src="images/ok.jpg" alt="" />
                     </div>
                     <div class="col-md-6 content">
                         <h3> <span>Thống Kê</span></h3>
@@ -119,7 +119,7 @@ $conn = mysqli_connect("localhost", "root", "", "quanlyhethong");
                 </div>
                 <div class="slide" data-blurred="">
                     <div class="col-md-6 image">
-                        <img src="images/3a.jpg" alt="Slider 1" />
+                        <img src="images/3a.jpg" alt="" />
                     </div>
                     <div class="col-md-6 content">
                         <h3><span>Quản Lí</span></h3>
@@ -140,7 +140,7 @@ $conn = mysqli_connect("localhost", "root", "", "quanlyhethong");
             });
         });
     </script>
-       <iframe id="myFrame" src="http://localhost:3000/quanlyhethong/world-master/index.html" style="height: 700px; width:100%"></iframe>
+       <iframe id="myFrame" src="world-master/index.html" style="height: 700px; width:100%"></iframe>
     <!-- //banner -->
     <!-- banner-bottom -->
     <div class="banner-bottom">

@@ -80,8 +80,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -107,6 +107,47 @@
                 <h2 style="text-align: center;"><b>THỐNG KÊ HẠN CẤP</b></h2>
             <div style="margin-left: 600px;">
                <!-- CODE TRONG ĐÂY -->
+               <form action="" method="POST">
+                    <label for="">Cơ sở hết hạn GCN </label>
+                    <input type="submit" name="thongke" value="Thống Kê">
+               </form><br>
+               <table border="1">
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên cơ sở</th>
+                        <th>Tên Linh Vực</th>
+                        <th>Số GCN</th>
+                        <th>Ngày Cấp</th>
+                        <th>Ngày hết hạn</th>
+
+                    </tr>
+                    <?php
+                    $a=date("Y/m/d");
+                    $conn = mysqli_connect("localhost","root","","quanlyhethong");
+                    $sql="SELECT coso.ten_coso,linhvuc.ten_linhvuc, coso_linhvuc.soGCN, coso_linhvuc.ngay_hethan,coso_linhvuc.ngay_cap, coso_linhvuc.id_cosolinhvuc from coso_linhvuc
+                        INNER JOIN coso ON coso.id_coso=coso_linhvuc.id_coso
+                        INNER JOIN linhvuc on linhvuc.id_linhvuc = coso_linhvuc.id_linhvuc
+                        WHERE coso_linhvuc.id_linhvuc !='1' and coso_linhvuc.ngay_hethan <= '$a'";
+                    $result = $conn->query($sql);
+                    $tong=mysqli_query($conn,$sql);
+                    $i = 0;
+                    while($row = $result->fetch_assoc()) {
+                        $i++;
+                    ?>
+                        <tr>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo $row['ten_coso']; ?></td>
+                            <td><?php echo $row['ten_linhvuc']; ?></td>
+                            <td><?php echo $row['soGCN']; ?></td>
+                            <td><?php echo $row['ngay_cap']; ?></td>
+                            <td><?php echo $row['ngay_hethan'];?></td>
+                            <td><a href="editgiaychungnhan.php?id_cosolinhvuc=<?php echo $row['id_cosolinhvuc']; ?>">Cấp Mới</a></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+               </table>
+                   <h3>Tổng số cơ sở thống kê là: <?php echo mysqli_num_rows($tong); ?></h3>
             </div>
             <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >

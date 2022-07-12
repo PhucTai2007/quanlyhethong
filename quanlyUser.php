@@ -1,3 +1,13 @@
+<?php
+$trang ='';
+if(isset($_GET['trang'])){
+    $trang = $_GET['trang'];
+    settype($trang,"int");
+}else{
+    $trang =1;
+}
+?>
+
 <!DOCTYPE html>
     <html>
 
@@ -80,8 +90,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -101,43 +111,53 @@
 
                 </nav>
             </div>
-            </div>
-
-
-                <h1 style="text-align: center;"><b>Quản lí User</b></h1>
-            <div style="margin-left: 650px;">
+            <h1 style="text-align: center;"><b>Quản lí User</b></h1>
+            <div style="margin-left: 350px;">
                 <table border="1">
                     <tr>
-                    <td>ID</td>
-                    <td>Tên User</td>
-                    <td>Username</td>
-                    <!-- <td>Password</td> -->
-                    <td>Phone</td>
-                    <td>Email</td>
+                        <th>ID</th>
+                        <th>Tên User</th>
+                        <th>Username</th>
+                        <th>Phone</th>
+                        <th>Email</th>
                     </tr>
-                    <?php 
-                        require 'connect.php';
-                        $query=mysqli_query($conn,"select * from user where mavaitro=1 ORDER BY id_user DESC");
-                        while($row=mysqli_fetch_array($query)){
+                    <?php
+                    require 'connect.php';
+                    $sotin1trang = 10;
+                    $from = ($trang - 1) * 10;
+                    $query=mysqli_query($conn,"SELECT * from user where mavaitro=1 and trangthai =0 ORDER BY id_user DESC LIMIT $from , $sotin1trang ");
+                    $i = 0;
+                    while($row=mysqli_fetch_array($query)){
+                        $i++;
                     ?>
                     <tr>
-                        <td><?php echo $row['id_user']; ?></td>
+                        <td><?php echo $i; ?></td>
                         <td><?php echo $row['ten_user']; ?></td>
                         <td><?php echo $row['username']; ?></td>
                         <td><?php echo $row['sdt_user']; ?></td>
                         <td><?php echo $row['mail_user']; ?></td>
-                        <td><a href="xoauser.php?id_user=<?php echo $row['id_user']; ?>">Xóa</a></td>
-                        <td><a href="suathongtinUser.php?id_user=<?php echo $row['id_user']; ?>">Sửa</a></td>
+                        <td><a href="xulyxoauser.php?id_user=<?php echo $row['id_user']; ?>">Xóa</a></td>
+                        <td><a href="edituser.php?id_user=<?php echo $row['id_user']; ?>">Sửa</a></td>
+                        <td>
+                            <a href="resetpassword.php?id_user=<?php echo $row['id_user']; ?>">Reset Password</a></td>
                     </tr>
-                    <?php
-                    }
-                    ?>
+                <?php
+                }
+                ?>
                 </table>
                 <br>
+                <?php
+                    require 'connect.php';
+                    $x = mysqli_query($conn,"SELECT id_user from user where mavaitro = '1' and trangthai = 0 ");
+                    $tongsotin = mysqli_num_rows($x);
+                    $sotrang = ceil( $tongsotin / $sotin1trang);
+                    for($t=1 ; $t <= $sotrang   ; $t++){
+                            echo "<a href='quanlyUser.php?trang=$t'> trang $t --</a> ";
+                    }
+                ?>
                 <p style="margin-left: 250px;"><button onclick="document.location='taomoiuser.php'">Thêm User</button></p>
                 <!-- <p style="margin-left: 265px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
                 <!-- <button onclick="document.location='taomoiuser.php'">Thêm User</button> -->
-                
             </div>
             <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >

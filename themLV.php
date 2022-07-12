@@ -19,13 +19,13 @@
                 <label for="idLH">ID loại hình</label>
                 <input type="text" name="idLH">
             </div> -->
-            <div class="form-control" >
+            <!-- <div class="form-control" >
                 <label for="trangthai">Trạng thái</label>
                 <select id="trangthai" name="trangthai" style="margin-left: 150px">
                     <option value="0">Hoạt động</option>
                     <option value="1">Đã xóa</option>
                 </select><br>
-            </div>
+            </div> -->
             <input id="themmoi" name="themmoi" type="submit" value="Thêm">
             <?php 
                 require 'xulythemLV.php';

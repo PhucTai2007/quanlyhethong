@@ -1,3 +1,12 @@
+<?php
+$trang ='';
+if(isset($_GET['trang'])){
+    $trang = $_GET['trang'];
+    settype($trang,"int");
+}else{
+    $trang =1;
+}
+?>
 <!DOCTYPE html>
     <html>
 
@@ -80,8 +89,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -101,24 +110,26 @@
 
                 </nav>
             </div>
-            </div>
-
-
-                <h1 style="text-align: center;"><b>Quản lí loại hình Không hoạt động</b></h1>
-            <div style="margin-left: 680px;">
+        </div>
+            <h1 style="text-align: center;"><b>Quản lí loại hình Không hoạt động</b></h1>
+            <div style="margin-left: 350px;">
                 <table border="1">
                     <tr>
-                        <td>ID</td>
-                        <td>Tên loại hình</td>
-                        <td>Trạng thái</td>
+                        <th>ID</th>
+                        <th>Tên loại hình</th>
+                        <th>Trạng thái</th>
+                    </tr>
                         <?php
                         require 'connect.php';
-                        $query = mysqli_query($conn, "select * from loaihinh WHERE trangthai_MD='1' ");
+                        $sotin1trang = 10;
+                        $from = ($trang - 1) * 10;
+                        $query = mysqli_query($conn, "SELECT * from loaihinh WHERE trangthai_MD='1' LIMIT $from , $sotin1trang ");
+                        $i = 0;
                         while ($row = mysqli_fetch_array($query)) {
+                            $i++;
                         ?>
-                    </tr>
-                    <tr></tr>
-                        <td><?php echo $row['id_loaihinh']; ?></td>
+                    <tr>
+                        <td><?php echo $i; ?></td>
                         <td><?php echo $row['ten_loaihinh']; ?></td>
                         <td>
                             <?php
@@ -129,18 +140,28 @@
                                 }
                             ?>
                         </td>
-                        <td><a href="RupdatetrangthaiLH.php?id_loaihinh=<?php echo $row['id_loaihinh']; ?>">Cập nhật trạng thái</a></td>
-                        <td><a href="deleteLH.php?id_loaihinh=<?php echo $row['id_loaihinh']; ?>">Xóa</a></td>
+                        <td><a href="RupdatetrangthaiLH.php?id_loaihinh=<?php echo $row['id_loaihinh']; ?>">Cập nhật</a></td>
+                        <!-- <td><a href="deleteLH.php?id_loaihinh=<?php echo $row['id_loaihinh']; ?>">Xóa</a></td> -->
                     </tr>
                 <?php
                     }
                 ?>
                 </table>
                 <br>
+                <div style="text-align: center;">
+                <?php
+                    require 'connect.php';
+                    $x = mysqli_query($conn,"SELECT id_loaihinh from loaihinh WHERE trangthai_MD='1' ");
+                    $tongsotin = mysqli_num_rows($x);
+                    $sotrang = ceil( $tongsotin / $sotin1trang);
+                    for($t=1 ; $t <= $sotrang   ; $t++){
+                            echo "<a href='QLLHoff.php?trang=$t'> trang $t --</a> ";
+                    }
+                ?>
+                </div>
                 <button onclick="document.location='themLH.php'">Thêm</button>
                 <button onclick="document.location='QLLH.php'">Loại hình hoạt động</button>
                 <br>
-            </div>
             <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >
             <div class="w3-banner-bottom-heading">

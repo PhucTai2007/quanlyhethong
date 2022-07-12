@@ -10,6 +10,29 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+table,th,td{
+  border: 1px solid black;
+}
+table{
+  border-collapse: collapse;
+  width: 80%;
+  height: 100px;
+  padding: 0px;
+}
+
+td {
+  padding: auto;
+  width: auto;
+  height: 30px;
+}
+th {
+  background-color: #04AA6D;
+  color: white;
+  text-align: center;
+  height: 50px;
+}
+
 body {
   margin: 0;
 }
@@ -2253,7 +2276,7 @@ caption {
   text-align: left;
 }
 th {
-  text-align: left;
+  text-align: center;
 }
 .table {
   width: 100%;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 29, 2022 lúc 03:05 AM
+-- Thời gian đã tạo: Th7 12, 2022 lúc 11:40 AM
 -- Phiên bản máy phục vụ: 10.4.22-MariaDB
 -- Phiên bản PHP: 8.1.2
 
@@ -54,7 +54,7 @@ CREATE TABLE `coso` (
 --
 
 INSERT INTO `coso` (`id_coso`, `id_loaihinh`, `id_tthd`, `id_user`, `id_tinh`, `id_huyen`, `id_xa`, `dia_chi`, `ten_coso`, `ten_chucoso`, `trinhdo_bangcap`, `sdt`, `ghi_chu`, `ngay_tao`, `ngay_update`, `trangthai`) VALUES
-(1, 1, 1, 3, 82, 823, 28666, 'Bình Hòa Đông', 'CH VTNN Điệu', 'Dương Văn Điệu', 2, '', '', '0000-00-00', '0000-00-00', 1),
+(1, 0, 1, 3, 82, 823, 28666, 'Bình Hòa Đông', 'CH VTNN Điệu', 'Dương Văn Điệu', 1, '0123456789', '', '0000-00-00', '2022-06-30', 1),
 (3, 1, 1, 5, 82, 817, 28453, 'Mỹ Thạnh', 'CH VTNN Phuong Trãi', 'Võ Thị Kim Trãi', 2, '0273914005', '', '0000-00-00', '0000-00-00', 1),
 (5, 1, 1, 6, 82, 817, 28447, 'Rạch Trắc', 'CH VTNN Nhã Thu', 'Nguyễn Văn Nhà', 2, '0273914005', '', '0000-00-00', '0000-00-00', 1),
 (6, 1, 1, 8, 82, 817, 28462, 'Ấp 1', 'CH VTNN Hùng Thuận', 'Nguyễn Quang Hùng', 1, '0913187158', '', '0000-00-00', '0000-00-00', 1),
@@ -72,10 +72,8 @@ INSERT INTO `coso` (`id_coso`, `id_loaihinh`, `id_tthd`, `id_user`, `id_tinh`, `
 (18, 1, 1, 23, 82, 817, 28462, 'Ấp 1', 'CH VTNN Hai Khánh', 'Phùng Văn Khánh', 2, '03828382821', '', '0000-00-00', '0000-00-00', 1),
 (19, 1, 1, 24, 82, 815, 28567, 'Ấp Long Mỹ', 'CH VTNN Phước Long', 'Lâm Phước Long', 1, '03203788913', '', '0000-00-00', '0000-00-00', 1),
 (20, 1, 1, 25, 82, 817, 28486, 'Ấp Hòa Trí', 'CH VTNN Năm Liêm', 'Hồ Thanh Liêm', 2, '02203483952', '', '0000-00-00', '0000-00-00', 1),
-(21, 1, 1, 26, 82, 817, 28477, 'Ấp Quý Phước', 'CH VTNN Nhật Linh', 'Đoàn Nhật Linh', 2, '09367628881', '', '0000-00-00', '0000-00-00', 0),
-(22, 1, 1, 27, 82, 819, 28396, 'Lợi Nhơn', 'CH VTNN Tấn Tài', 'Hồ Tấn Tài', 1, '02894332161', '', '0000-00-00', '0000-00-00', 0),
-(37, 1, 1, 56, 82, 815, 28249, '123áda', 'CH VTNN Tai', 'NguyenPhucTai123', 1, '0123456789', NULL, '2022-06-27', '2022-06-27', 0),
-(40, 0, 0, NULL, 82, 815, 28249, 'Ấp ...sdas', 'test', 'test', 2, '0389812942', '', '2022-06-28', '2022-06-28', 1);
+(21, 1, 1, 26, 82, 817, 28477, 'Ấp Quý Phước', 'CH VTNN Nhật Linh', 'Đoàn Nhật Linh', 2, '09367628881', '', '0000-00-00', '0000-00-00', 1),
+(22, 0, 1, 27, 82, 816, 28300, 'Cần thơ', 'CH VTNN Tấn Tài1', 'Hồ Tấn Tài1', 1, '0123456789', 'không có', '0000-00-00', '2022-07-11', 1);
 
 -- --------------------------------------------------------
 
@@ -88,9 +86,9 @@ CREATE TABLE `coso_linhvuc` (
   `id_cosolinhvuc` int(11) NOT NULL,
   `id_coso` int(11) NOT NULL,
   `id_linhvuc` int(11) NOT NULL,
-  `soGCN` char(50) COLLATE utf8mb4_bin NOT NULL,
-  `ngay_cap` date NOT NULL,
-  `ngay_hethan` date NOT NULL
+  `soGCN` char(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `ngay_cap` date DEFAULT NULL,
+  `ngay_hethan` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -98,7 +96,7 @@ CREATE TABLE `coso_linhvuc` (
 --
 
 INSERT INTO `coso_linhvuc` (`id_cosolinhvuc`, `id_coso`, `id_linhvuc`, `soGCN`, `ngay_cap`, `ngay_hethan`) VALUES
-(1, 1, 4, '204/HKD', '2019-04-16', '2024-08-16'),
+(1, 1, 4, '202/HKD', '2023-07-26', '2025-07-03'),
 (2, 3, 4, '080/HKD', '2018-10-09', '2023-10-09'),
 (3, 5, 4, '034/HKD', '2018-09-10', '2023-09-10'),
 (4, 6, 4, '051/HKD', '2018-09-18', '2023-09-18'),
@@ -115,9 +113,8 @@ INSERT INTO `coso_linhvuc` (`id_cosolinhvuc`, `id_coso`, `id_linhvuc`, `soGCN`, 
 (15, 17, 4, '1.198/HKD', '2020-04-01', '2025-04-01'),
 (16, 18, 4, '1.222/HKD', '2018-08-09', '2023-08-09'),
 (17, 19, 4, '1.190/HKD', '2020-01-06', '2025-01-06'),
-(18, 20, 4, '1.121/HKD', '2020-10-20', '2025-10-20'),
-(19, 21, 4, '1.156/HKD', '2018-12-21', '2023-12-21'),
-(20, 22, 4, '1.173/HKD', '2020-03-22', '2025-03-22');
+(18, 20, 4, '1.121/HKD', '2020-10-20', '2022-07-07'),
+(19, 21, 4, '1.156/HKD', '2022-08-22', '2022-11-04');
 
 -- --------------------------------------------------------
 
@@ -871,8 +868,7 @@ CREATE TABLE `linhvuc` (
 INSERT INTO `linhvuc` (`id_linhvuc`, `ten_linhvuc`, `trangthai_MD`) VALUES
 (1, 'Giống Cây Trồng', 0),
 (3, 'Phân Bón', 0),
-(4, 'Thuốc BVTV', 0),
-(5, 'Thuốc Trừ Sâu', 0);
+(4, 'Thuốc BVTV', 0);
 
 -- --------------------------------------------------------
 
@@ -892,15 +888,8 @@ CREATE TABLE `loaihinh` (
 --
 
 INSERT INTO `loaihinh` (`id_loaihinh`, `ten_loaihinh`, `trangthai_MD`) VALUES
-(0, 'Doanh Nghiệp', 1),
-(1, 'Hộ kinh doanh', 0),
-(2, 'khong', 0),
-(3, 'khong', 0),
-(4, 'Congty 1 TV', 0),
-(5, 'Congty', 0),
-(6, 'test', 0),
-(7, 'thuốc trừ sâu', 0),
-(8, 'test1', 0);
+(0, 'Doanh Nghiệp', 0),
+(1, 'Hộ Kinh Doanh', 0);
 
 -- --------------------------------------------------------
 
@@ -1019,38 +1008,36 @@ CREATE TABLE `user` (
   `gioi_tinh` int(32) NOT NULL,
   `sdt_user` char(11) COLLATE utf8mb4_bin NOT NULL,
   `mail_user` char(50) COLLATE utf8mb4_bin NOT NULL,
-  `user_thaotac` varchar(45) COLLATE utf8mb4_bin NOT NULL
+  `user_thaotac` varchar(45) COLLATE utf8mb4_bin NOT NULL,
+  `trangthai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`id_user`, `mavaitro`, `username`, `password`, `ten_user`, `gioi_tinh`, `sdt_user`, `mail_user`, `user_thaotac`) VALUES
-(1, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'tài', 0, '1', 'admin@gmail.com', ''),
-(3, 1, 'duongvandieu', 'c0b984f1167f6e927e74f865fea71b7b', 'Dương Văn Điệu', 0, '123', 'DuongVanDieu@gmail.com', ''),
-(5, 1, 'vothikimtrai', 'bf803e180223ebc82d11ad08db6f8588', 'Võ Thị Kim Trãi', 1, '02733914527', 'vothikimtrai@gmaiil.com', ''),
-(6, 1, 'nguyenvannha', '8687cc20e139a75f47fea588abd02750', 'Nguyễn Văn Nhà', 0, '0273914005', 'nguyenvannha@gmail.com', ''),
-(8, 1, 'nguyenquanghung', '9adf22f620bb955f300d76c44ea446e8', 'Nguyễn Quang Hùng', 0, '0913187158', 'nguyenquanghung@gmail.com', ''),
-(9, 1, 'lamduyphuc', '7926141fb7890e84c65c8c90ef0cdbcc', 'Lâm Duy Phúc', 0, '0982231868', 'lamduyphuc@gmail.com', ''),
-(10, 1, 'nguyenvanthuong', 'c71ae42b59cbe3c447a64d2e311043d4', 'Nguyễn Văn Thương', 0, '0937778388', 'nguyenvanthuong@gmail.com', ''),
-(11, 1, 'lehoangvu', '10101c196f8f299ee6fd46593c433402', 'Lê Hoàng Vũ', 0, '0763926965', 'lehoangvu@gmail.com', ''),
-(14, 1, 'levanhuu', '167a3ed61d586e4ab1da513bbc9f494a', 'Lê Văn Hũu', 0, '0939322911', 'levanhuu@gmail.com', ''),
-(15, 1, 'tranhuutri', '59cff5a0c0e14a8303d6e0105237aff5', 'Trần Hữu Trí', 0, '0394247300', 'tranhuutri@gmail.com', ''),
-(16, 1, 'nguyentruonggiang', '3c7679740dadfaa54e49f6a16a64689b', 'Nguyễn Trường Giang', 0, '0936677357', 'nguyentruonggiang@gmail.com', ''),
-(17, 1, 'tangthedi', '22e5d93a3b05baa5a6c3edd9b9a14c7c', 'Tăng Thế Dĩ', 0, '02358439211', 'tangthedi@gmail.com', ''),
-(19, 1, 'nguyenkimson', 'fb170e600cee3061dee71d16dd8d03fe', 'Nguyễn Kim Sơn', 0, '03435030493', 'nguyenkimson@gmail.com', ''),
-(20, 1, 'nguyenvanhung', 'eb60a17160c0ccbf6d21860ab4ec4dc9', 'Nguyễn Văn Hùng', 0, '09237766662', 'nguyenvanhung@gmail.com', ''),
-(21, 1, 'lequochong', '37b8c52e27d9aa97d19df44abfdb6e51', 'Lê Quốc Hồng', 0, '03229693012', 'lequochong@gmail.com', ''),
-(22, 1, 'caovanco', '8cd720254bbfb956c32a8749f43fed79', 'Cao Văn Có', 0, '02482938434', 'caovanco@gmail.com', ''),
-(23, 1, 'phungvankhanh', '68c2669ce3645d37d0dd9ffe259f0c35', 'Phùng Văn Khánh', 0, '03828382821', 'phungvankhanh@gmail.com', ''),
-(24, 1, 'lamphuoclong', '1f35f27a589d18ed37ebfdd49437200c', 'Lâm Phước Long', 0, '03203788913', 'lamphuoclong@gmail.com', ''),
-(25, 1, 'hothanhliem', '231f3fdabecfd1b90a038f3f155a5c5c', 'Hồ Thanh Liêm', 0, '02203483952', 'hothanhliem@gmail.com', ''),
-(26, 1, 'doannhatlinh', 'adf9dc5063167eefc4fd8716defd36ae', 'Đoàn Nhật Linh', 0, '09367628881', 'doannhatlinh@gmail.com', ''),
-(27, 1, 'hotantai', 'eb407aa8eeba3df595756cbf775b482d', 'Hồ Tấn Tài', 0, '02894332161', 'hotantai@gmail.com', ''),
-(54, 1, 'nguyenphuctai1', '877ce606744ee26d7abfb19dbc5955cd', 'Nguyễn Phúc Tài', 0, '0389000001', 'tai1@gmail.com', ''),
-(55, 1, 'nguyenphuctai', 'ff76dc6a5092bf1bd71c6721c3a91b5c', 'Nguyễn Phúc Tài', 1, '0389000001', 'tai@gmail.com', ''),
-(56, 1, 'nguyenphuctai12', '3ddd19f54da5b23c8d828963d3013063', 'Nguyễn Phúc Tài', 0, '0389000001', 'tai123@gmail.com', '');
+INSERT INTO `user` (`id_user`, `mavaitro`, `username`, `password`, `ten_user`, `gioi_tinh`, `sdt_user`, `mail_user`, `user_thaotac`, `trangthai`) VALUES
+(1, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'tài', 0, '1', 'admin@gmail.com', '', 0),
+(3, 1, 'duongvandieu', 'c0b984f1167f6e927e74f865fea71b7b', 'Dương Văn Điệu', 0, '0123456789', 'duongvandieu@gmail.com', '', 1),
+(5, 1, 'vothikimtrai', 'bf803e180223ebc82d11ad08db6f8588', 'Võ Thị Kim Trãi', 1, '02733914527', 'vothikimtrai@gmaiil.com', '', 0),
+(6, 1, 'nguyenvannha', '8687cc20e139a75f47fea588abd02750', 'Nguyễn Văn Nhà', 0, '0273914005', 'nguyenvannha@gmail.com', '', 0),
+(8, 1, 'nguyenquanghung', '9adf22f620bb955f300d76c44ea446e8', 'Nguyễn Quang Hùng', 0, '0913187158', 'nguyenquanghung@gmail.com', '', 0),
+(9, 1, 'lamduyphuc', '7926141fb7890e84c65c8c90ef0cdbcc', 'Lâm Duy Phúc', 0, '0982231868', 'lamduyphuc@gmail.com', '', 0),
+(10, 1, 'nguyenvanthuong', 'c71ae42b59cbe3c447a64d2e311043d4', 'Nguyễn Văn Thương', 0, '0937778388', 'nguyenvanthuong@gmail.com', '', 0),
+(11, 1, 'lehoangvu', '10101c196f8f299ee6fd46593c433402', 'Lê Hoàng Vũ', 0, '0763926965', 'lehoangvu@gmail.com', '', 0),
+(14, 1, 'levanhuu', '167a3ed61d586e4ab1da513bbc9f494a', 'Lê Văn Hũu', 0, '0939322911', 'levanhuu@gmail.com', '', 0),
+(15, 1, 'tranhuutri', '59cff5a0c0e14a8303d6e0105237aff5', 'Trần Hữu Trí', 0, '0394247300', 'tranhuutri@gmail.com', '', 0),
+(16, 1, 'nguyentruonggiang', '3c7679740dadfaa54e49f6a16a64689b', 'Nguyễn Trường Giang', 0, '0936677357', 'nguyentruonggiang@gmail.com', '', 0),
+(17, 1, 'tangthedi', '22e5d93a3b05baa5a6c3edd9b9a14c7c', 'Tăng Thế Dĩ', 0, '02358439211', 'tangthedi@gmail.com', '', 0),
+(19, 1, 'nguyenkimson', 'fb170e600cee3061dee71d16dd8d03fe', 'Nguyễn Kim Sơn', 0, '03435030493', 'nguyenkimson@gmail.com', '', 0),
+(20, 1, 'nguyenvanhung', 'eb60a17160c0ccbf6d21860ab4ec4dc9', 'Nguyễn Văn Hùng', 0, '09237766662', 'nguyenvanhung@gmail.com', '', 0),
+(21, 1, 'lequochong', '37b8c52e27d9aa97d19df44abfdb6e51', 'Lê Quốc Hồng', 0, '03229693012', 'lequochong@gmail.com', '', 0),
+(22, 1, 'caovanco', '8cd720254bbfb956c32a8749f43fed79', 'Cao Văn Có', 0, '02482938434', 'caovanco@gmail.com', '', 0),
+(23, 1, 'phungvankhanh', '68c2669ce3645d37d0dd9ffe259f0c35', 'Phùng Văn Khánh', 0, '03828382821', 'phungvankhanh@gmail.com', '', 0),
+(24, 1, 'lamphuoclong', '1f35f27a589d18ed37ebfdd49437200c', 'Lâm Phước Long', 0, '03203788913', 'lamphuoclong@gmail.com', '', 0),
+(25, 1, 'hothanhliem', '231f3fdabecfd1b90a038f3f155a5c5c', 'Hồ Thanh Liêm', 0, '02203483952', 'hothanhliem@gmail.com', '', 0),
+(26, 1, 'doannhatlinh', 'adf9dc5063167eefc4fd8716defd36ae', 'Đoàn Nhật Linh', 0, '09367628881', 'doannhatlinh@gmail.com', '', 0),
+(27, 1, 'hotantai', 'eb407aa8eeba3df595756cbf775b482d', 'Hồ Tấn Tài', 0, '02894332161', 'hotantai@gmail.com', '', 0);
 
 -- --------------------------------------------------------
 
@@ -12315,13 +12302,13 @@ ALTER TABLE `xa`
 -- AUTO_INCREMENT cho bảng `coso`
 --
 ALTER TABLE `coso`
-  MODIFY `id_coso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_coso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT cho bảng `coso_linhvuc`
 --
 ALTER TABLE `coso_linhvuc`
-  MODIFY `id_cosolinhvuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_cosolinhvuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT cho bảng `linhvuc`
@@ -12333,13 +12320,13 @@ ALTER TABLE `linhvuc`
 -- AUTO_INCREMENT cho bảng `loaihinh`
 --
 ALTER TABLE `loaihinh`
-  MODIFY `id_loaihinh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_loaihinh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

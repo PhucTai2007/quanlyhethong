@@ -1,8 +1,45 @@
+<?php
+$s ='';
+if(isset($_POST['khuvuc'])){
+    $s=$_POST['khuvuc'];
+    // echo $s;
+    // }else{
+    //     echo 'khuvuc';
+}
+ ?>
+<?php
+$ss = '';
+    if(isset($_POST['id_linhvuc'])){
+        $ss=$_POST['id_linhvuc'];
+    //     echo $ss;
+    // }else{
+    //     echo 'linhvuc';
+}
+ ?>
 <!DOCTYPE html>
     <html>
 
         <head>
             <title>Thống kê</title>
+            <style>
+                table,th,td{
+                    border: 1px solid black;
+                }
+                table{
+                    border-collapse: collapse;
+                    width: 80%;
+                    height: 100px;
+                }
+                td,th {
+                    text-align: center;
+                    padding: auto;
+                }
+                th {
+                    background-color: #04AA6D;
+                    color: white;
+                    text-align: center;
+                }
+            </style>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="keywords" content="CHI CỤC TRỒNG TRỌT VÀ BẢO VỆ THỰC VẬT TỈNH TIỀN GIANG" />
@@ -80,8 +117,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -104,9 +141,82 @@
             </div>
             <!-- DIV CHỨC NĂNG -->
 
-                <h2 style="text-align: center;"><b>THỐNG KÊ LĨNH VỰC</b></h2>
-            <div style="margin-left: 600px;">
+                <h2 style="text-align: center;"><b>THỐNG KÊ</b></h2>
+            <div style="margin-left: 300px;">
                <!-- CODE TRONG ĐÂY -->
+               <form action="" method="POST">
+                    <div>
+                        <label for="">Lĩnh Vực </label>
+                        <select name="id_linhvuc">
+                            <option><?php echo $ss?></option>
+                                <?php
+                                include_once("connect.php");
+                                    $sql ="SELECT *FROM linhvuc where trangthai_MD= '0' ";
+                                    $query =  mysqli_query($conn, $sql);
+                                    $num = mysqli_num_rows($query);
+                                    if($num>0){
+                                        while($row = mysqli_fetch_array($query)){
+                                    ?>
+                                    <option value="<?php echo $row['ten_linhvuc'] ?>"><?php echo $row['ten_linhvuc'] ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                        </select>
+                        <label for="">Khu Vực </label>
+                        <select name="khuvuc">
+                            <option value=""><?php echo $s?></option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'ThanhphoMyTho') echo "selected=\"selected\"";  ?> value="Thành phố Mỹ Tho">Thành phố Mỹ Tho</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'ThixaGoCong') echo "selected=\"selected\"";  ?> value="Thị xã Gò Công">Thị xã Gò Công</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'ThixaCaiLay') echo "selected=\"selected\"";  ?> value="Thị xã Cai Lậy">Thị xã Cai Lậy</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'HuyenTanPhuoc') echo "selected=\"selected\"";  ?> value="Huyện Tân Phước">Huyện Tân Phước</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'HuyenCaiBe') echo "selected=\"selected\"";  ?> value="Huyện Cái Bè">Huyện Cái Bè</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'HuyenCaiLay') echo "selected=\"selected\"";  ?> value="Huyện Cai Lậy">Huyện Cai Lậy</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'Huyenchauthanh') echo "selected=\"selected\"";  ?> value="Huyện Châu Thành">Huyện Châu Thành</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'HuyenChoGao') echo "selected=\"selected\"";  ?> value="Huyện Chợ Gạo">Huyện Chợ Gạo</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'HuyenGoCongTay') echo "selected=\"selected\"";  ?> value="Huyện Gò Công Tây">Huyện Gò Công Tây</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'HuyenGoCongDong') echo "selected=\"selected\"";  ?> value="Huyện Gò Công Đông">Huyện Gò Công Đông</option>
+                            <option <?php if (isset($khuvuc) && $khuvuc == 'HuyenTanPhuDong') echo "selected=\"selected\"";  ?> value="Huyện Tân Phú Đông">Huyện Tân Phú Đông</option>
+                        </select>
+                    </div><br>
+                    <input type="submit" name="thongke" value="Thống Kê">
+               </form><br><br>
+               <table border="1">
+                    <tr>
+                        <th>Stt</th>
+                        <th>Tên cơ sở</th>
+                        <th>Tên lĩnh vực</th>
+                        <th>Tên Khu vực</th>
+                        <th></th>
+
+                    </tr>
+                    <?php
+                    $conn = mysqli_connect("localhost","root","","quanlyhethong");
+                    $sql = "SELECT coso_linhvuc.id_cosolinhvuc,coso.ten_coso,linhvuc.ten_linhvuc,huyen.ten_huyen FROM coso_linhvuc
+                        INNER JOIN coso ON coso.id_coso = coso_linhvuc.id_coso
+                        INNER JOIN linhvuc ON linhvuc.id_linhvuc = coso_linhvuc.id_linhvuc
+                        INNER JOIN huyen on huyen.id_huyen = coso.id_huyen
+                        WHERE (huyen.ten_huyen LIKE '%$s%') and (linhvuc.ten_linhvuc LIKE '%$ss%')";
+                    /*    echo $sql; */
+                    $result = $conn->query($sql);
+                    $tong=mysqli_query($conn,$sql);
+                    $i = 0;
+                    while($row = $result->fetch_assoc()) {
+                        $i++;
+                    ?>
+                        <tr>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo $row['ten_coso']; ?></td>
+                            <td><?php echo $row['ten_linhvuc']; ?></td>
+                            <td><?php echo $row['ten_huyen']; ?></td>
+                            <td><a href="editcosolinhvuc.php?id_cosolinhvuc=<?php echo $row['id_cosolinhvuc']; ?>">Sửa</a></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+               </table>
+                   <h3>Tổng số cơ sở thống kê là: <?php echo mysqli_num_rows($tong); ?></h3>
+                    </div>
             </div>
             <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >

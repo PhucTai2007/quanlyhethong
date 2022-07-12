@@ -86,8 +86,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -111,7 +111,7 @@
 
 
                 <!-- div chức năng -->
-            <div style="margin-left: 700px;">
+            <div style="margin-left: 550px;">
             <div>
             <?php 
                 $username=$_SESSION['username'];
@@ -128,7 +128,7 @@
                 // echo "Username". $username;
                 echo "<table id='tb'>
                     <tr>
-                        <td colspan='2' style='text-align:center;'>THÔNG TIN TÀI KHOẢN<br><br>  </td>
+                        <th colspan='2' style='text-align:center;'>THÔNG TIN TÀI KHOẢN<br><br>  </th>
                     </tr>
                     <br><br>
                     <tr>
@@ -151,7 +151,7 @@
            ?>
         </form>
            <br>
-        <button onclick="document.location='suathongtinadmin.php'">Sửa thông tin</button>
+        <button style="margin-left: 500px;" onclick="document.location='suathongtinadmin.php'">Sửa thông tin</button>
         <br>
         <br>
             </div>

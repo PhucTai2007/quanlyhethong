@@ -1,8 +1,20 @@
+<?php
+$xa = '';
+$huyen = '';
+$sql = "SELECT * FROM XA where id_huyen='$huyen' ";
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/taomoiuser.css" />
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/SmoothScroll.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="ajax.js" type="text/javascript"></script>
+
 </head>
 <body>
     <div class="container">
@@ -21,60 +33,59 @@
             <div class="form-control">
                 <label for="loaihinh">Loại Hình</label>
                 <select id="loaihinh" name="loaihinh" style="margin-left: 150px">
-                    <option value="0">Doanh Nghiệp</option>
-                    <option value="1">Hộ Kinh Doanh</option>
+                    <option>Chọn loại hình</option>
+                    <?php
+                        include_once("connect.php");
+                        $sql ="SELECT *FROM loaihinh ";
+                        $query =  mysqli_query($conn, $sql);
+                        $num = mysqli_num_rows($query);
+                        if($num>0){
+                            while($row = mysqli_fetch_array($query)){
+                    ?>
+                    <option value="<?php echo $row['id_loaihinh'] ?>"><?php echo $row['ten_loaihinh'] ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
                 </select><br>
-                <!-- <input type="text" name="loaihinh"> -->
             </div>
-            <div class="form-control">
-                <label for="tinhtranghoatdong">Loại Hình</label>
-                <select id="tinhtranghoatdong" name="tinhtranghoatdong" style="margin-left: 150px">
-                    <option value="1">Đang hoạt động</option>
-                    <option value="0">Ngưng Hoạt Động</option>
+            <!-- <div class="form-control">
+                <label for="linhvuc">Lĩnh vực</label>
+                <select id="linhvuc" name="linhvuc" style="margin-left: 150px">
+                    <option value="1">Giống cây trồng</option>
+                    <option value="3">Phân Bón</option>
+                    <option value="4">Thuốc BVTV</option>
                 </select><br>
-            </div>
+            </div> -->
             <div class="form-control">
                 <label for="tinh">Tỉnh</label>
                 <select id="tinh" name="tinh" style="margin-left: 150px">
                     <option value="82">Tiền Giang</option>
                 </select><br>
             </div>
-            <div class="form-control">
-                <label for="huyen">Huyện</label>
-                <select id="huyen" name="huyen" style="margin-left: 150px">
-                    <option value="815">Thành phố Mỹ Tho</option>
-                    <option value="816">Thị xã Gò Công</option>
-                    <option value="817">Thị xã Cai Lậy</option>
-                    <option value="818">Huyện Tân Phước</option>
-                    <option value="819">Huyện Cái Bè</option>
-                    <option value="820">Huyện Cai Lậy</option>
-                    <option value="821">Huyện Châu Thành</option>
-                    <option value="822">Huyện Chợ Gạo</option>
-                    <option value="823">Huyện Gò Công Tây</option>
-                    <option value="824">Huyện Gò Công Đông</option>
-                    <option value="825">Huyện Tân Phú Đông</option>
+            <div class="form-control" >
+                <label for="huyen" value="huyen" > Huyện </label>
+                <select id="huyen" name="huyen" class="huyen" style="margin-left: 150px">
+                    <?php
+                        include_once("connect.php");
+                        $sql ="SELECT *FROM huyen where id_tinh='82' ";
+                        $query =  mysqli_query($conn, $sql);
+                        $num = mysqli_num_rows($query);
+                        if($num>0){
+                            while($row = mysqli_fetch_array($query)){
+                    ?>
+                    <option value="<?php echo $row['id_huyen'] ?>"><?php echo $row['ten_huyen'] ?></option>
+                    <?php
+                        }
+                    }
+                    ?>
                 </select><br>
             </div>
             <div class="form-control">
-                <label for="xa">Xã</label>
-                
-                <select id="xa" name="xa" value="815" style="margin-left: 150px">
-                    <option value="28249">Phường 5</option>
-                    <option value="28252">Phường 4</option>
-                    <option value="817">Thị xã Cai Lậy</option>
-                    <option value="818">Huyện Tân Phước</option>
-                    <option value="819">Huyện Cái Bè</option>
-                    <option value="820">Huyện Cai Lậy</option>
-                    <option value="821">Huyện Châu Thành</option>
-                    <option value="822">Huyện Chợ Gạo</option>
-                    <option value="823">Huyện Gò Công Tây</option>
-                    <option value="824">Huyện Gò Công Đông</option>
-                    <option value="825">Huyện Tân Phú Đông</option>
+                <label >Xã</label>
+                <select id="xa" name="xa" class="xa" style="margin-left: 150px">
+                    <option value="">xa</option>
                 </select><br>
-                <select id="xa" name="xa" value="816" style="margin-left: 150px">
-                    <option value="28249">Phường 5</option>
-                    <option value="28252">Phường 4</option>
-                </select>
             </div>
             <div class="form-control">
                 <label for="Diachi">Đia chỉ</label>
@@ -89,7 +100,7 @@
             </div>
             <div class="form-control">
                 <label for="Phone">Số ĐT</label>
-                <input type="text" name="Phone" required/>
+                <input type="text" name="Phone" required pattern=".{10}" title="Vui lòng nhập lại số ĐT" />
             </div>
             <div class="form-control">
                 <label for="ghichu">Ghi chú</label>
@@ -103,13 +114,12 @@
                 <label for="ngayupdate">Ngày Cập Nhật</label>
                 <input type="date" name="ngayupdate" required/>
             </div>
-            <div class="form-control">
+            <!-- <div class="form-control">
                 <label for="trangthai">Trạng thái</label>
                 <select id="trangthai" name="trangthai" style="margin-left: 150px">
-                    <option value="0">Không hoạt động</option>
                     <option value="1">Đang hoạt động</option>
                 </select><br>
-            </div>
+            </div> -->
         <input id="themmoi" name="themmoi" type="submit" value="Thêm">
         <?php
             require 'xulythemCS.php';

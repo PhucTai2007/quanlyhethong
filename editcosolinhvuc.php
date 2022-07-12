@@ -1,28 +1,41 @@
 <?php
 include_once("connect.php");
-if(isset($_GET['id_loaihinh'])){
-    $sql = "SELECT * FROM loaihinh where id_loaihinh = " .$_GET['id_loaihinh'];
+if(isset($_GET['id_cosolinhvuc'])){
+    $sql = "SELECT * FROM coso_linhvuc where id_cosolinhvuc = " .$_GET['id_cosolinhvuc'];
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
 }
-
 if(isset($_POST['update'])){
-    $ten = $_POST['ten_loaihinh'];
-    $update = "UPDATE loaihinh SET ten_loaihinh='$ten' where id_loaihinh= ". $_GET['id_loaihinh'];
-    $up = mysqli_query($conn, $update);
-    if(!isset($sql)){
-        die("Error $sql" .mysqli_connect_error());
+    $linhvuc = $_POST['id_linhvuc'];
+    $soGCN = $_POST['soGCN'];
+    $ngaycap = $_POST['ngaycap'];
+    $ngayhethan = $_POST['ngayhethan'];
+
+    if($linhvuc == 1){
+        $update = "UPDATE coso_linhvuc SET id_linhvuc='$linhvuc', soGCN = '' , ngay_cap = '' , ngay_hethan = ''  where id_cosolinhvuc= ". $_GET['id_cosolinhvuc'];
+        $up = mysqli_query($conn, $update);
+        if(!isset($up)){
+            die("Error $up" .mysqli_connect_error());
+        }else{
+            echo '<script language="javascript">alert("Cập nhật Cơ sở thành công!"); window.location="QLCS.php";</script>';
+        }
     }else{
-        echo '<script language="javascript">alert("Cập nhật loại hình thành công!"); window.location="QLLH.php";</script>';
-        // header("location:QLLH.php");
+        $update = "UPDATE coso_linhvuc SET id_linhvuc='$linhvuc', soGCN = '".$_POST['soGCN']."' , ngay_cap = '$ngaycap' , ngay_hethan = '$ngayhethan'  where id_cosolinhvuc= ". $_GET['id_cosolinhvuc'];
+        $up = mysqli_query($conn, $update);
+        if(!isset($up)){
+            die("Error $up" .mysqli_connect_error());
+        }else{
+            echo '<script language="javascript">alert("Cập nhật Cơ sở thành công!"); window.location="QLCS.php";</script>';
+        }
     }
 }
+
 ?>
 <!DOCTYPE html>
-    <html lang="en">
+    <html>
 
         <head>
-            <title>CẬP NHẬT LOẠI HÌNH</title>
+            <title>EDIT GCN</title>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -121,21 +134,59 @@ if(isset($_POST['update'])){
                             </ul>
                         </nav>
                     </div>
+
                 </nav>
             </div>
             </div>
-            <!-- CODE -->
-            <div style="margin-left: 350px;">
-                <form method="post">
-                    <h1 style="margin-left: 420px;">Edit </h1>
-                    <label style="margin-left: 400px;">Tên loại hình:</label>
-                    <input style="margin-right: 390px;" type="text" name="ten_loaihinh" value="<?php echo $row['ten_loaihinh']; ?>" required><br/><br/>
-                    <button style="margin-left: 400px;" type="submit" name="update" id="update" ><strong>Update</strong></button>
-                    <a href="QLLH.php"><button style="margin-right:350px ;" type="button" value="button">Cancel</button></a>
-                </form>
-            
+        <!-- CODE   -->
+            <h1 style="text-align: center;"><b>EDIT</b></h1>
+            <div style="margin-left: 750px;">
+            <form method="post">
+                <div>
+                <?php
+                require 'connect.php';
+                $query=mysqli_query($conn,"SELECT coso.ten_coso,linhvuc.ten_linhvuc, coso_linhvuc.soGCN, coso_linhvuc.ngay_hethan,coso_linhvuc.ngay_cap, coso_linhvuc.id_cosolinhvuc from coso_linhvuc
+                    INNER JOIN coso ON coso.id_coso=coso_linhvuc.id_coso
+                    INNER JOIN linhvuc on linhvuc.id_linhvuc = coso_linhvuc.id_linhvuc where id_cosolinhvuc = '".$_GET['id_cosolinhvuc']."' ");
+                    while($row=mysqli_fetch_assoc($query)){
+                ?>
+                <label>Tên Cơ Sở: <?php echo $row['ten_coso'] ?></label><br>
+                <label>Lĩnh vực: </label>
+                    <select id="id_linhvuc" name="id_linhvuc" ?>">
+                            <?php
+                                include_once("connect.php");
+                                $sql ="SELECT * FROM linhvuc where trangthai_MD= '0' ";
+                                $query =  mysqli_query($conn, $sql);
+                                $num = mysqli_num_rows($query);
+                                if($num>0){
+                                    while($row = mysqli_fetch_array($query)){
+                            ?>
+                            <option value="<?php echo $row['id_linhvuc'] ?>"><?php echo $row['ten_linhvuc'] ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                    </select><br><br>
+                </div>
+                    <div>
+                        <label>Số GCN:
+                            <input type="text" name="soGCN" required/>
+                        </label><br/><br/>
+                        <label>Ngày Cấp:
+                            <input type="date" name="ngaycap" required/>
+                        </label><br/><br/>
+                        <label>Ngày hết hạn:
+                            <input type="date" name="ngayhethan" required/>
+                        </label><br/><br/>
+                    </div>
+                <?php
+                }
+                ?>
+                <button type="submit" name="update" id="update">Update</button>
+                <a href="giaychungnhan.php"><button type="button" value="button">Cancel</button></a>
+            </form>
             </div>
-        <div class="banner-bottom">
+            <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >
             <div class="w3-banner-bottom-heading">
                 <h3> <span></span></h3>

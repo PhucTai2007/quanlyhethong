@@ -1,3 +1,12 @@
+<?php
+$trang ='';
+if(isset($_GET['trang'])){
+    $trang = $_GET['trang'];
+    settype($trang,"int");
+}else{
+    $trang =1;
+}
+?>
 <!DOCTYPE html>
     <html>
 
@@ -80,8 +89,8 @@
 
                                 <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực</a></li>
+                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
+                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
                                         </li>
@@ -105,20 +114,24 @@
 
 
                 <h1 style="text-align: center;"><b>Quản lí lĩnh vực</b></h1>
-            <div style="margin-left: 850px;">
+            <div style="margin-left: 350px;">
 				<table border="1">
 					<tr>
-					    <td>ID</td>
-					    <td>Tên lĩnh vực</td>
-                        <td>Tình trạng</td>
+					    <th>ID</th>
+					    <th>Tên lĩnh vực</th>
+                        <th>Tình trạng</th>
                     </tr>
 					<?php 
 						require 'connect.php';
-						$query=mysqli_query($conn,"select * from `linhvuc` WHERE trangthai_MD='0' ");
+                        $sotin1trang = 10;
+                        $from = ($trang - 1) * 10;
+						$query=mysqli_query($conn,"select * from `linhvuc` WHERE trangthai_MD='0' LIMIT $from , $sotin1trang ");
+                        $i=0;
 						while($row=mysqli_fetch_array($query)){
+                            $i++;
 					?>
 					<tr>
-						<td><?php echo $row['id_linhvuc']; ?></td>
+						<td><?php echo $i; ?></td>
 						<td><?php echo $row['ten_linhvuc']; ?></td>
                         <td>
                             <?php
@@ -129,16 +142,27 @@
                                 }
                             ?>
                         </td>
-						<td><a href="editLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Sửa</a></td>
-						<td><a href="updatetrangthaiLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Cập nhật trạng thái</a></td>
+						<td style="text-align: center;"><a href="editLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Sửa</a></td>
+						<td style="text-align: center; width: 200px;"><a href="updatetrangthaiLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Xóa</a></td>
 					</tr>
 					<?php
 					}
 					?>
 				</table>
                 <br>
+                <div style="text-align: center;">
+                <?php
+                    require 'connect.php';
+                    $x = mysqli_query($conn,"SELECT id_linhvuc from linhvuc WHERE trangthai_MD='0' ");
+                    $tongsotin = mysqli_num_rows($x);
+                    $sotrang = ceil( $tongsotin / $sotin1trang);
+                    for($t=1 ; $t <= $sotrang   ; $t++){
+                            echo "<a href='QLLV.php?trang=$t'> trang $t --</a> ";
+                    }
+                ?>
+                </div><br>
                 <button onclick="document.location='themLV.php'">Thêm</button>
-                <button onclick="document.location='QLLVoff.php'">Lĩnh vực chưa hoạt động</button>
+                <!-- <button onclick="document.location='QLLVoff.php'">Lĩnh vực chưa hoạt động</button> -->
 				<!-- <p style="margin-left: 60px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
 				
             </div>

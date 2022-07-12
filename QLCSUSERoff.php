@@ -1,31 +1,29 @@
 <?php
-include_once("connect.php");
-if(isset($_GET['id_loaihinh'])){
-    $sql = "SELECT * FROM loaihinh where id_loaihinh = " .$_GET['id_loaihinh'];
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($result);
+$s ='';
+if(isset($_POST['huyen'])){
+      $s=$_POST['huyen'];
+}
+?>
+
+<?php
+$ss = '';
+if(isset($_POST['xa'])){
+    $ss=$_POST['xa'];
 }
 
-if(isset($_POST['update'])){
-    $ten = $_POST['ten_loaihinh'];
-    $update = "UPDATE loaihinh SET ten_loaihinh='$ten' where id_loaihinh= ". $_GET['id_loaihinh'];
-    $up = mysqli_query($conn, $update);
-    if(!isset($sql)){
-        die("Error $sql" .mysqli_connect_error());
-    }else{
-        echo '<script language="javascript">alert("Cập nhật loại hình thành công!"); window.location="QLLH.php";</script>';
-        // header("location:QLLH.php");
-    }
+$trang ='';
+if(isset($_GET['trang'])){
+    $trang = $_GET['trang'];
+    settype($trang,"int");
+}else{
+    $trang =1;
 }
 ?>
 <!DOCTYPE html>
-    <html lang="en">
+    <html>
 
         <head>
-            <title>CẬP NHẬT LOẠI HÌNH</title>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>QUẢN LÝ CƠ SỞ</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="keywords" content="CHI CỤC TRỒNG TRỌT VÀ BẢO VỆ THỰC VẬT TỈNH TIỀN GIANG" />
@@ -87,55 +85,123 @@ if(isset($_POST['update'])){
                     <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
                         <nav>
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="admin.php">Trang Chủ</a></li>
+                                <li class="active"><a href="index.php">Trang Chủ</a></li>
                                 <!-- <li><a href="about.html" class="hvr-sweep-to-bottom">About</a></li>
                                         <li><a href="plans.html" class="hvr-sweep-to-bottom">Plans</a></li> -->
                                 <li><a href="#" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quản Lí<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="QLLH.php">Quản Lí Loại Hình</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="QLLV.php">Quản Lí Lĩnh Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="QLCS.php">Quản Lí Cơ Sở</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="quanlyUser.php">Quản Lí Người Dùng</a></li>
-                                        <!-- <li><a class="hvr-sweep-to-bottom" href="icons.html">Icons</a></li>
-                                                <li><a class="hvr-sweep-to-bottom" href="typography.html">Typography</a></li>     -->
+                                        <li><a class="hvr-sweep-to-bottom" href="QLCSUSER.php">Quản Lí Cơ Sở</a></li>
                                     </ul>
                                 </li>
 
-                                <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                               
                                 <li><a href="taikhoan.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài khoản<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="thongtinadmin.php">Thông tin tài khoản</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="thongtinUser.php">Thông tin tài khoản</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="doimatkhau.php">Đổi Mật Khẩu</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="suathongtinadmin.php">Sửa Tài Khoản</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="suathongtinUser.php">Sửa Tài Khoản</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="logout.php">Đăng Xuất</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </nav>
                     </div>
+
                 </nav>
             </div>
             </div>
-            <!-- CODE -->
-            <div style="margin-left: 350px;">
-                <form method="post">
-                    <h1 style="margin-left: 420px;">Edit </h1>
-                    <label style="margin-left: 400px;">Tên loại hình:</label>
-                    <input style="margin-right: 390px;" type="text" name="ten_loaihinh" value="<?php echo $row['ten_loaihinh']; ?>" required><br/><br/>
-                    <button style="margin-left: 400px;" type="submit" name="update" id="update" ><strong>Update</strong></button>
-                    <a href="QLLH.php"><button style="margin-right:350px ;" type="button" value="button">Cancel</button></a>
-                </form>
-            
+
+
+                <h1 style="text-align: center;"><b>Quản lí cơ sở</b></h1>
+            <div>
+            <table border="1" style="margin: auto;">
+                    <tr>
+                        <th rowspan="2">ID</th>
+                        <th rowspan="2">Tên Cơ Sở</th>
+                        <th rowspan="2">Tên chủ cơ sở</th>
+                        <th colspan="2">Trình độ nhân lực</th>
+                        <th colspan="3" style="text-align: center;">Địa chỉ</th>
+                        <th rowspan="2">Loại hình</th>
+                        <th rowspan="2">tình trạng</th>
+                        <th rowspan="2">Phone</th>
+                        <th rowspan="2">Ghi chú</th>
+                    </tr>
+                    <tr>
+                        <th>Bằng Cấp</th>
+                        <th>GIấy chứng nhận</th>
+                        <th>Ấp</th>
+                        <th>Xã</th>
+                        <th>Huyện</th>
+                    </tr>
+                    <?php
+                        require 'connect.php';
+                        $sotin1trang = 10;
+                        $from = ($trang - 1) * 10;
+                        $query=mysqli_query($conn,"SELECT coso.id_coso,coso.id_loaihinh,coso.id_tthd,huyen.id_huyen,xa.id_xa, coso.dia_chi,coso.ten_coso,coso.ten_chucoso,coso.sdt,coso.trinhdo_bangcap,coso.ghi_chu,loaihinh.ten_loaihinh,tinhtranghoatdong.ten_tthd,huyen.ten_huyen,xa.ten_xa,coso.trangthai from coso
+                        INNER JOIN huyen on coso.id_huyen = huyen.id_huyen
+                        INNER JOIN xa on coso.id_xa = xa.id_xa
+                        INNER JOIN tinhtranghoatdong on coso.id_tthd = tinhtranghoatdong.id_tthd
+                        INNER JOIN loaihinh on coso.id_loaihinh= loaihinh.id_loaihinh
+                        WHERE trangthai='0' and (huyen.ten_huyen LIKE '%$s%') and (xa.ten_xa LIKE '%$ss%') LIMIT $from , $sotin1trang ");
+                        $i=0;
+                        while($row=mysqli_fetch_array($query)){
+                            $i++;
+                    ?>
+                    <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $row['ten_coso']; ?></td>
+                        <td><?php echo $row['ten_chucoso']; ?></td>
+                        <td><?php
+                                // echo $row['trinhdo_bangcap'];
+                                if($row['trinhdo_bangcap'] == 1){
+                                    echo "X";
+                                }else{
+                                    echo "";
+                                }
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                                if($row['trinhdo_bangcap'] == 2){
+                                    echo "X";
+                                }else{
+                                    echo "";
+                                }
+                            ?>
+                        </td>
+                        <td><?php echo $row['dia_chi']; ?></td>
+                        <td><?php echo $row['ten_xa']; ?></td>
+                        <td><?php echo $row['ten_huyen']; ?></td>
+                        <td><?php echo $row['ten_loaihinh'];?></td>
+                        <td><?php echo $row['ten_tthd'];?></td>
+                        <td><?php echo $row['sdt']; ?></td>
+                        <td><?php echo $row['ghi_chu']; ?></td>
+                        <td><a href="RupdatetrangthaiCS.php?id_coso=<?php echo $row['id_coso']; ?>">Cập nhật</a></td>
+                        <!-- <td><a href="deleteCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</a></td> -->
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                </table>
+                <br>
+                <div style="text-align: center;">
+                <?php
+                    require 'connect.php';
+                    $x = mysqli_query($conn,"SELECT id_coso from coso WHERE trangthai='0'");
+                    $tongsotin = mysqli_num_rows($x);
+                    $sotrang = ceil( $tongsotin / $sotin1trang);
+                    for($t=1 ; $t <= $sotrang   ; $t++){
+                            echo "<a href='QLCSUSERoff.php?trang=$t'> trang $t --</a> ";
+                    }
+                ?>
+                <!-- <br> -->
+                <div style="text-align: center;">
+                    <button onclick="document.location='themCS.php'">Thêm</button>
+                    <button onclick="document.location='QLCSUSER.php'">Cở sở hoạt động</button>
+                    <!-- <p style="margin-left: 300px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
+                </div>
             </div>
-        <div class="banner-bottom">
+            <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >
             <div class="w3-banner-bottom-heading">
                 <h3> <span></span></h3>

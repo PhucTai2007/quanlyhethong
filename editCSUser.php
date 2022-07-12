@@ -1,31 +1,41 @@
 <?php
 include_once("connect.php");
-if(isset($_GET['id_loaihinh'])){
-    $sql = "SELECT * FROM loaihinh where id_loaihinh = " .$_GET['id_loaihinh'];
+if(isset($_GET['id_coso'])){
+    $sql = "SELECT * FROM coso where id_coso = " .$_GET['id_coso'];
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
 }
 
 if(isset($_POST['update'])){
-    $ten = $_POST['ten_loaihinh'];
-    $update = "UPDATE loaihinh SET ten_loaihinh='$ten' where id_loaihinh= ". $_GET['id_loaihinh'];
+    $ten = $_POST['ten_coso'];
+    $tenchu = $_POST['ten_chucoso'];
+    $loaihinh = $_POST['id_loaihinh'];
+    $trinhdo_bangcap =  $_POST['trinhdo_bangcap'];
+    $huyen = $_POST['huyen'];
+    $xa  =$_POST['xa'];
+    $diachi = $_POST['diachi'];
+    $sdt = $_POST['sdt'];
+    $ghichu = $_POST['ghichu'];
+    $ngayupdate = $_POST['ngayupdate'];
+
+    $update = "UPDATE coso SET ten_coso='$ten' , ten_chucoso='$tenchu' ,id_Loaihinh = $loaihinh, trinhdo_bangcap = '$trinhdo_bangcap', id_huyen = '$huyen',id_xa = '$xa',dia_chi='$diachi', sdt ='$sdt' ,ghi_chu='$ghichu',ngay_update='$ngayupdate'  where id_coso= ". $_GET['id_coso'];
     $up = mysqli_query($conn, $update);
     if(!isset($sql)){
         die("Error $sql" .mysqli_connect_error());
     }else{
-        echo '<script language="javascript">alert("Cập nhật loại hình thành công!"); window.location="QLLH.php";</script>';
-        // header("location:QLLH.php");
+        echo '<script language="javascript">alert("Cập nhật Cơ sở thành công!"); window.location="QLCSUSER.php";</script>';
+        // header("location:QLCS.php");
     }
 }
 ?>
 <!DOCTYPE html>
-    <html lang="en">
+    <html>
 
         <head>
-            <title>CẬP NHẬT LOẠI HÌNH</title>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Cập nhật cơ sở</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="keywords" content="CHI CỤC TRỒNG TRỌT VÀ BẢO VỆ THỰC VẬT TỈNH TIỀN GIANG" />
@@ -54,6 +64,8 @@ if(isset($_POST['update'])){
             <script src="js/jquery-1.11.1.min.js"></script>
             <script src="js/bootstrap.js"></script>
             <script src="js/SmoothScroll.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+            <script src="ajax.js" type="text/javascript"></script>
             <script type="text/javascript">
                 jQuery(document).ready(function($) {
                     $(".scroll").click(function(event) {
@@ -92,29 +104,15 @@ if(isset($_POST['update'])){
                                         <li><a href="plans.html" class="hvr-sweep-to-bottom">Plans</a></li> -->
                                 <li><a href="#" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quản Lí<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="QLLH.php">Quản Lí Loại Hình</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="QLLV.php">Quản Lí Lĩnh Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="QLCS.php">Quản Lí Cơ Sở</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="quanlyUser.php">Quản Lí Người Dùng</a></li>
-                                        <!-- <li><a class="hvr-sweep-to-bottom" href="icons.html">Icons</a></li>
-                                                <li><a class="hvr-sweep-to-bottom" href="typography.html">Typography</a></li>     -->
+                                        <li><a class="hvr-sweep-to-bottom" href="QLCSUSER.php">Quản Lí Cơ Sở</a></li>
                                     </ul>
                                 </li>
 
-                                <li><a href="thongke.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thống Kê<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <!-- <li><a class="hvr-sweep-to-bottom" href="theokhuvuc.php">Theo Khu Vực</a></li> -->
-                                        <li><a class="hvr-sweep-to-bottom" href="theolinhvuc.php">Theo Lĩnh Vực và Khu Vực</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="denhancap.php">Đến Hạn Cấp</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="giaychungnhan.php">Giấy Chứng Nhận</a>
-                                        </li>
-                                    </ul>
-                                </li>
                                 <li><a href="taikhoan.php" class="dropdown-toggle hvr-sweep-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài khoản<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="hvr-sweep-to-bottom" href="thongtinadmin.php">Thông tin tài khoản</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="doimatkhau.php">Đổi Mật Khẩu</a></li>
-                                        <li><a class="hvr-sweep-to-bottom" href="suathongtinadmin.php">Sửa Tài Khoản</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="thongtinUser.php">Thông tin tài khoản</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="doimatkhauUser.php">Đổi Mật Khẩu</a></li>
+                                        <li><a class="hvr-sweep-to-bottom" href="suathongtinUser.php">Sửa Tài Khoản</a></li>
                                         <li><a class="hvr-sweep-to-bottom" href="logout.php">Đăng Xuất</a></li>
                                     </ul>
                                 </li>
@@ -124,16 +122,96 @@ if(isset($_POST['update'])){
                 </nav>
             </div>
             </div>
-            <!-- CODE -->
+            <!-- Code -->
             <div style="margin-left: 350px;">
                 <form method="post">
-                    <h1 style="margin-left: 420px;">Edit </h1>
-                    <label style="margin-left: 400px;">Tên loại hình:</label>
-                    <input style="margin-right: 390px;" type="text" name="ten_loaihinh" value="<?php echo $row['ten_loaihinh']; ?>" required><br/><br/>
-                    <button style="margin-left: 400px;" type="submit" name="update" id="update" ><strong>Update</strong></button>
-                    <a href="QLLH.php"><button style="margin-right:350px ;" type="button" value="button">Cancel</button></a>
+                    <h1 style="text-align: 550px;">Edit </h1>
+                    <table>
+                        <tr>
+                            <td>Tên cơ sở</td>
+                            <td> <input type="text" name="ten_coso" value="<?php echo $row['ten_coso']; ?>" required></td>
+                        </tr>
+                        <tr>
+                            <td>Tên chủ cơ sở</td>
+                            <td> <input type="text" name="ten_chucoso" value="<?php echo $row['ten_chucoso']; ?>" required></td>
+                        </tr>
+                        <tr>
+                            <td>Loại hình</td>
+                            <td>
+                                <select id="id_loaihinh" name="id_loaihinh">
+                                    <?php
+                                    include_once("connect.php");
+                                    $sql ="SELECT *FROM loaihinh ";
+                                    $query =  mysqli_query($conn, $sql);
+                                    $num = mysqli_num_rows($query);
+                                    if($num>0){
+                                    while($row = mysqli_fetch_array($query)){
+                                    ?>
+                                    <option value="<?php echo $row['id_loaihinh'] ?>"><?php echo $row['ten_loaihinh'] ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tên trình độ nhân lực:</td>
+                            <td>
+                                <select id="trinhdo_bangcap" name="trinhdo_bangcap" value="<?php echo $row['trinhdo_bangcap']; ?>">
+                                    <option value="1">Bằng cấp</option>
+                                    <option value="2">Giấy chứng nhận</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> Huyện </td>
+                            <td>
+                            <select id="huyen" name="huyen" class="huyen">
+                                <?php
+                                    include_once("connect.php");
+                                    $sql ="SELECT *FROM huyen where id_tinh='82' ";
+                                    $query =  mysqli_query($conn, $sql);
+                                    $num = mysqli_num_rows($query);
+                                    if($num>0){
+                                        while($row = mysqli_fetch_array($query)){
+                                ?>
+                                <option value="<?php echo $row['id_huyen'] ?>"><?php echo $row['ten_huyen'] ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Xã</td>
+                            <td>
+                            <select id="xa" name="xa" class="xa">
+                                <option value="">xa</option>
+                            </select><br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ấp</td>
+                            <td> <input type="text" name="diachi" required></td>
+                        </tr>
+                        <tr>
+                            <td>SĐT:</td>
+                            <td><input type="text" name="sdt" required pattern=".{10}" title="Vui lòng nhập lại số ĐT"></td>
+                        </tr>
+                        <tr>
+                            <td>Ghi chú:</td>
+                            <td><input type="text" name="ghichu" ></td>
+                        </tr>
+                        <tr>
+                            <td>Ngày Cập nhật</td>
+                            <td> <input type="date" name="ngayupdate" required></td>
+                        </tr>
+                    </table>
+                    <button type="submit" name="update" id="update">Update</button>
+                    <a href="QLCSUSER.php"><button type="button" value="button">Cancel</button></a>
                 </form>
-            
             </div>
         <div class="banner-bottom">
         <div class="container" style="margin-left: 500px;" >
