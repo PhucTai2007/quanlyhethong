@@ -117,6 +117,7 @@ if(isset($_GET['trang'])){
             <div style="margin-left: 350px;">
 				<table border="1">
 					<tr>
+<<<<<<< HEAD
 					    <th>ID</th>
 					    <th>Tên lĩnh vực</th>
                         <th>Tình trạng</th>
@@ -127,12 +128,33 @@ if(isset($_GET['trang'])){
                         $from = ($trang - 1) * 10;
 						$query=mysqli_query($conn,"select * from `linhvuc` WHERE trangthai_MD='0' LIMIT $from , $sotin1trang ");
                         $i=0;
+=======
+<<<<<<< HEAD
+					<td>ID</td>
+					<td>Tên lĩnh vực</td>
+					<?php 
+						require 'connect.php';
+						$query=mysqli_query($conn,"select * from `linhvuc`");
+=======
+					    <td>ID</td>
+					    <td>Tên lĩnh vực</td>
+                        <td>Tình trạng</td>
+                    </tr>
+					<?php 
+						require 'connect.php';
+						$query=mysqli_query($conn,"select * from `linhvuc` WHERE trangthai_MD='0' ");
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
 						while($row=mysqli_fetch_array($query)){
                             $i++;
 					?>
 					<tr>
 						<td><?php echo $i; ?></td>
 						<td><?php echo $row['ten_linhvuc']; ?></td>
+<<<<<<< HEAD
+						<td><a href="editLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Sửa</td>
+						<td><a href="deleteLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Xóa</td>
+=======
                         <td>
                             <?php
                                 if($row['trangthai_MD'] == 0){
@@ -142,14 +164,21 @@ if(isset($_GET['trang'])){
                                 }
                             ?>
                         </td>
+<<<<<<< HEAD
 						<td style="text-align: center;"><a href="editLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Sửa</a></td>
 						<td style="text-align: center; width: 200px;"><a href="updatetrangthaiLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Xóa</a></td>
+=======
+						<td><a href="editLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Sửa</a></td>
+						<td><a href="updatetrangthaiLV.php?id_linhvuc=<?php echo $row['id_linhvuc']; ?>">Cập nhật trạng thái</a></td>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
 					</tr>
 					<?php
 					}
 					?>
 				</table>
                 <br>
+<<<<<<< HEAD
                 <div style="text-align: center;">
                 <?php
                     require 'connect.php';
@@ -163,6 +192,14 @@ if(isset($_GET['trang'])){
                 </div><br>
                 <button onclick="document.location='themLV.php'">Thêm</button>
                 <!-- <button onclick="document.location='QLLVoff.php'">Lĩnh vực chưa hoạt động</button> -->
+=======
+<<<<<<< HEAD
+                <p style="margin-left: 60px;"><button onclick="document.location='themLV.php'">Thêm</button></p>
+=======
+                <button onclick="document.location='themLV.php'">Thêm</button>
+                <button onclick="document.location='QLLVoff.php'">Lĩnh vực chưa hoạt động</button>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
 				<!-- <p style="margin-left: 60px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
 				
             </div>

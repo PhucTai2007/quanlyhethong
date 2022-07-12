@@ -118,10 +118,36 @@ if(isset($_GET['trang'])){
             <div style="margin-left: 350px;">
                 <table border="1">
                     <tr>
+<<<<<<< HEAD
                         <th>STT</th>
                         <th>Tên loại hình</th>
                         <th>Trạng thái</th>
                     </tr>
+=======
+                        <td>ID</td>
+                        <td>Tên loại hình</td>
+<<<<<<< HEAD
+                        <?php
+                        require 'connect.php';
+                        $query = mysqli_query($conn, "select * from `loaihinh`");
+                        while ($row = mysqli_fetch_array($query)) {
+                        ?>
+                    <tr>
+                        <td><?php echo $row['id_loaihinh']; ?></td>
+                        <td><?php echo $row['ten_loaihinh']; ?></td>
+                        <td><a href="editLH.php?id_loaihinh=<?php echo $row['id_loaihinh']; ?>">Sửa</td>
+                        <td><a href="deleteLH.php?id_loaihinh=<?php echo $row['id_loaihinh']; ?>">Xóa</td>
+                    </tr>
+                <?php
+                        }
+                ?>
+                </table>
+                <br>
+                <p style="margin-left: 60px;"><button onclick="document.location='themLH.php'">Thêm</button></p>
+                <!-- <p style="margin-left: 60px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
+=======
+                        <td>Trạng thái</td>
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
                         <?php
                         require 'connect.php';
                         $sotin1trang = 10;
@@ -163,7 +189,13 @@ if(isset($_GET['trang'])){
                 ?>
                 </div><br>
                 <button onclick="document.location='themLH.php'">Thêm</button>
+<<<<<<< HEAD
                 <!-- <button onclick="document.location='QLLHoff.php'">Loại hình không hoạt động</button> -->
+=======
+                <button onclick="document.location='loaihinhoff.php'">Loại hình không hoạt động</button>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+                
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
                 <br>
             </div>
             <div class="banner-bottom">

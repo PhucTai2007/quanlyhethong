@@ -24,6 +24,21 @@ $sql = "SELECT * FROM XA where id_huyen='$huyen' ";
         <form id="form" class="form" method="post" action="themCS.php" enctype="multipart/form-data">
             <div class="form-control">
                 <label for="TenCS">Tên Cơ Sở</label>
+<<<<<<< HEAD
+                <input type="text" name="TenCS">
+            </div>
+            <div class="form-control">
+                <label for="TenChu">Tên Chủ Cơ Sở</label>
+                <input type="text" name="TenChu">
+            </div>
+            <div class="form-control">
+                <label for="Diachi">Đia chỉ</label>
+                <input type="text" name="Diachi">
+            </div>
+            <div class="form-control">
+                <label for="Phone">Số ĐT</label>
+                <input type="text" name="Phone"/>
+=======
                 <input type="text" name="TenCS" required>
             </div>
             <div class="form-control">
@@ -90,10 +105,15 @@ $sql = "SELECT * FROM XA where id_huyen='$huyen' ";
             <div class="form-control">
                 <label for="Diachi">Đia chỉ</label>
                 <input type="text" name="Diachi" required>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
             </div>
             <div class="form-control" >
                 <label for="trinhdo">Trình độ</label>
                 <select id="trinhdo" name="trinhdo" style="margin-left: 150px">
+<<<<<<< HEAD
+                    <option value="0">Bằng cấp</option>
+                    <option value="1">Giấy chứng nhận</option>
+=======
                     <option value="1">Bằng cấp</option>
                     <option value="2">Giấy chứng nhận</option>
                 </select><br>
@@ -118,6 +138,7 @@ $sql = "SELECT * FROM XA where id_huyen='$huyen' ";
                 <label for="trangthai">Trạng thái</label>
                 <select id="trangthai" name="trangthai" style="margin-left: 150px">
                     <option value="1">Đang hoạt động</option>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                 </select><br>
             </div> -->
         <input id="themmoi" name="themmoi" type="submit" value="Thêm">
@@ -126,5 +147,9 @@ $sql = "SELECT * FROM XA where id_huyen='$huyen' ";
         ?>
         </form>
     </div>
+<<<<<<< HEAD
+</body> 
+=======
 </body>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
 </html>

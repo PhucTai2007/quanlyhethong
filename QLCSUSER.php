@@ -175,9 +175,20 @@ if(isset($_GET['trang'])){
                         <td><?php echo $row['ten_loaihinh'];?></td>
                         <td><?php echo $row['ten_tthd'];?></td>
                         <td><?php echo $row['sdt']; ?></td>
+<<<<<<< HEAD
                         <td><?php echo $row['ghi_chu']; ?></td>
                         <td><a href="editCSUser.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</a></td>
                         <td><a href="updatetrangthaiCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</a></td>
+=======
+                        <td><?php echo $row['trinhdo_bangcap']; ?></td>
+<<<<<<< HEAD
+                        <td><a href="editCS.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</td>
+                        <td><a href="deleteCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</td>
+=======
+                        <td><a href="editCS.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</a></td>
+                        <td><a href="deleteCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</a></td>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
                     </tr>
                     <?php
                     }

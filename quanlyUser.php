@@ -121,6 +121,7 @@ if(isset($_GET['trang'])){
                         <th>Phone</th>
                         <th>Email</th>
                     </tr>
+<<<<<<< HEAD
                     <?php
                     require 'connect.php';
                     $sotin1trang = 10;
@@ -129,17 +130,40 @@ if(isset($_GET['trang'])){
                     $i = 0;
                     while($row=mysqli_fetch_array($query)){
                         $i++;
+=======
+                    <?php 
+                        require 'connect.php';
+<<<<<<< HEAD
+                        $query=mysqli_query($conn,"select * from `user`");
+=======
+                        $query=mysqli_query($conn,"select * from user where mavaitro=1 ORDER BY id_user DESC");
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+                        while($row=mysqli_fetch_array($query)){
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
                     ?>
                     <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['ten_user']; ?></td>
                         <td><?php echo $row['username']; ?></td>
+<<<<<<< HEAD
+                    
                         <td><?php echo $row['sdt_user']; ?></td>
                         <td><?php echo $row['mail_user']; ?></td>
+                        <td><a href="xoauser.php?id_user=<?php echo $row['id_user']; ?>">Xóa</td>
+                        <!-- <td><a href="suathongtinUser.php?id_user=<?php echo $row['id_user']; ?>">Sửa</td> -->
+=======
+                        <td><?php echo $row['sdt_user']; ?></td>
+                        <td><?php echo $row['mail_user']; ?></td>
+<<<<<<< HEAD
                         <td><a href="xulyxoauser.php?id_user=<?php echo $row['id_user']; ?>">Xóa</a></td>
                         <td><a href="edituser.php?id_user=<?php echo $row['id_user']; ?>">Sửa</a></td>
                         <td>
                             <a href="resetpassword.php?id_user=<?php echo $row['id_user']; ?>">Reset Password</a></td>
+=======
+                        <td><a href="xoauser.php?id_user=<?php echo $row['id_user']; ?>">Xóa</a></td>
+                        <td><a href="suathongtinUser.php?id_user=<?php echo $row['id_user']; ?>">Sửa</a></td>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
                     </tr>
                 <?php
                 }

@@ -149,6 +149,7 @@ if(isset($_GET['trang'])){
                     </tr>
                     <?php
                         require 'connect.php';
+<<<<<<< HEAD
                         $sotin1trang = 10;
                         $from = ($trang - 1) * 10;
                         $query=mysqli_query($conn,"SELECT coso.id_coso , coso.id_loaihinh , coso.id_tthd , huyen.id_huyen , xa.id_xa , coso.dia_chi , coso.ten_coso , coso.ten_chucoso , coso.sdt , coso.trinhdo_bangcap , coso.ghi_chu , loaihinh.ten_loaihinh , tinhtranghoatdong.ten_tthd , huyen.ten_huyen , xa.ten_xa , coso.trangthai , linhvuc.ten_linhvuc , coso_linhvuc.soGCN , coso_linhvuc.ngay_cap , coso_linhvuc.ngay_hethan   from coso
@@ -162,6 +163,14 @@ if(isset($_GET['trang'])){
                         $i = 0;
                         while($row=mysqli_fetch_assoc($query)){
                             $i++;
+=======
+<<<<<<< HEAD
+                        $query=mysqli_query($conn,"select * from `coso`");
+=======
+                        $query=mysqli_query($conn,"select * from `coso` WHERE trangthai='1' ");
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+                        while($row=mysqli_fetch_array($query)){
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
                     ?>
                     <tr>
                         <td><?php echo  $i; ?></td>
@@ -195,9 +204,19 @@ if(isset($_GET['trang'])){
                         <td><?php echo $row['ngay_hethan'];?></td>
                         <td><?php echo $row['ten_tthd'];?></td>
                         <td><?php echo $row['sdt']; ?></td>
+<<<<<<< HEAD
                         <td><?php echo $row['ghi_chu']; ?></td>
                         <td><a href="editCS.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</a></td>
                         <td><a href="updatetrangthaiCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</a></td>
+=======
+                        <td><?php echo $row['trinhdo_bangcap']; ?></td>
+                        <td><a href="editCS.php?id_coso=<?php echo $row['id_coso']; ?>">Sửa</td>
+<<<<<<< HEAD
+                        <td><a href="deleteCS.php?id_coso=<?php echo $row['id_coso']; ?>">Xóa</td>
+=======
+                        <td><a href="updatetrangthaiCS.php?id_coso=<?php echo $row['id_coso']; ?>">Cập nhật</td>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
                     </tr>
                     <?php
                     }
@@ -216,10 +235,19 @@ if(isset($_GET['trang'])){
                 ?>
                 </div><br>
                 <!-- <br> -->
+<<<<<<< HEAD
                 <div style="text-align: center;">
                     <button onclick="document.location='themCS.php'">Thêm</button>
                     <!-- <button onclick="document.location='QLCSoff.php'">Cơ sở ngưng hoạt động</button> -->
                 </div>
+=======
+<<<<<<< HEAD
+                <p style="margin-left: 300px;"><button onclick="document.location='themCS.php'">Thêm</button></p>
+=======
+                <button onclick="document.location='themCS.php'">Thêm</button>
+                <button onclick="document.location='QLCSoff.php'">Cơ sỡ chưa hoạt động</button>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
+>>>>>>> f99cf71961861d9eca21df819ff0dab6371e469a
                 <!-- <p style="margin-left: 300px;"><button onclick="document.location='admin.php'">Trở về</button></p> -->
             </div>
             <div class="banner-bottom">

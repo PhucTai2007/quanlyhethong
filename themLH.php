@@ -15,7 +15,15 @@
                 <label for="tenLH">Tên loại hình</label>
                 <input type="text" name="tenLH" required>
             </div>
+<<<<<<< HEAD
+            <!-- <div class="form-control">
+                <label for="idLH">ID loại hình</label>
+                <input type="text" name="idLH">
+            </div> -->
+            <div class="form-control" >
+=======
             <!-- <div class="form-control" >
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
                 <label for="trangthai">Trạng thái</label>
                 <select id="trangthai" name="trangthai" style="margin-left: 150px">
                     <option value="0">Hoạt động</option>

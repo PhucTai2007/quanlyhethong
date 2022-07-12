@@ -169,7 +169,11 @@ $conn = mysqli_connect("localhost", "root", "", "quanlyhethong");
             });
         });
     </script>
+<<<<<<< HEAD
+    <iframe id="myFrame" src="http://localhost:3000/quanlyhethong/world-master/index.html" style="height: 700px; width:100%"></iframe>
+=======
     <iframe id="myFrame" src="world-master/index.html" style="height: 700px; width:100%"></iframe>
+>>>>>>> f227594134b7200e4598830a2f72e4b5d5ac88e8
     <!-- //banner -->
     <!-- banner-bottom -->
     <div class="banner-bottom">
